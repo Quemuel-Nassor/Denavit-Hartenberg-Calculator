@@ -25,20 +25,12 @@ namespace Web.Controllers
             return View();
         }
 
-        [Route("/privacy")]
-        public IActionResult Privacy()
-        {
-            ViewData["Title"] = "Privacy Policy";
-            return View();
-        }
-
         [Route("/api")]
         public IActionResult Api()
         {
             ViewData["Title"] = "Api Documentation";
             return View();
         }
-
 
         [Route("/calculator")]
         public IActionResult Calculator()
