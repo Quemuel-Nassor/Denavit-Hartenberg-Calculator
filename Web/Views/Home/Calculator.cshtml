@@ -2,5 +2,12 @@
     <h1 class="display-5 my-5">@ViewData["Title"]</h1>
     <div class="text-justify mx-5">
         <p>You can easily calculate coordinates to you project using this calculator.</p>
+
+        <div class="text-center">
+            Enter data in the fields and press the calculate button to get the results
+            <form #calculator asp-controller="Calculator" asp-action="Calculate" method="GET">
+                <button type="submit" class="btn btn-secondary">Calculate</button>
+            </form>
+        </div>
     </div>
 </div>
