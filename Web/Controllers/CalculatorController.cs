@@ -1,3 +1,4 @@
+using CoreShared.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -5,8 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Web.Models;
+using System.Text.Json.Serialization;
 
 namespace Web.Controllers
 {
@@ -18,15 +21,31 @@ namespace Web.Controllers
         {
             try
             {
+                //Disable certificate validation
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-                using (HttpClient cli = new HttpClient())
+                //API request data
+                using (HttpClient cli = new HttpClient(clientHandler))
                 {
+
+                    //API call
                     var request = await cli.GetAsync("https://localhost:6001/calculate");
 
+                    //Response verification
                     if (request.IsSuccessStatusCode)
                     {
-                        var result = request.Content.ReadAsStringAsync();
-                        return new JsonResult(result);
+                        //Read string request content
+                        var result = await request.Content.ReadAsStringAsync();
+
+                        JsonSerializerOptions opt = new JsonSerializerOptions() { AllowTrailingCommas = true };
+
+                        //Deserialize the answer into a corresponding template list 
+                        List<ResultDto> response = JsonSerializer.Deserialize<List<ResultDto>>(result, opt);
+                        List<dynamic> test = JsonSerializer.Deserialize<List<dynamic>>(result, opt);
+
+                        //return json list
+                        return new JsonResult(test);
                     }
                     else
                     {
@@ -37,7 +56,7 @@ namespace Web.Controllers
             }
             catch (Exception error)
             {
-                throw new Exception("Not was possible connect on API: \"" + error.Message+"\"");
+                throw new Exception("Not was possible connect on API: \"" + error.Message + "\"");
             }
 
         }
