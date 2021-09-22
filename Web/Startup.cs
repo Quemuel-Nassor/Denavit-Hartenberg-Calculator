@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Web
 {
@@ -52,6 +54,23 @@ namespace Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            CultureInfo culture = new CultureInfo("pt-BR");
+            culture.NumberFormat.NumberDecimalSeparator = ".";
+            culture.NumberFormat.NumberDecimalSeparator = ",";
+
+            CultureInfo[] supportedCultures = new[] { culture };
+
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            app.UseRequestLocalization(
+                new RequestLocalizationOptions()
+                {
+                    SupportedCultures = supportedCultures,
+                    SupportedUICultures = supportedCultures
+                }
+            );
         }
     }
 }
