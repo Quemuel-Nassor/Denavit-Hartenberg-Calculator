@@ -1,20 +1,26 @@
 using CoreShared.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Web.Models;
-using System.Text.Json.Serialization;
+using Microsoft.Extensions.Configuration;
 
 namespace Web.Controllers
 {
     public class CalculatorController : Controller
     {
+        private readonly IConfiguration _configuration;
+        private readonly string UrlApi;
+
+        public CalculatorController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            UrlApi = _configuration.GetSection("ApiUrl").Value;
+        }
 
         [Route("/calculate")]
         public async Task<IActionResult> Calculate()
@@ -23,34 +29,25 @@ namespace Web.Controllers
             {
                 //Disable certificate validation
                 HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
                 //API request data
                 using (HttpClient cli = new HttpClient(clientHandler))
                 {
-
                     //API call
-                    var request = await cli.GetAsync("https://localhost:6001/calculate");
+                    var apiRequest = await cli.GetStringAsync(UrlApi + "/calculate");
 
-                    //Response verification
-                    if (request.IsSuccessStatusCode)
+                    //Json serializer options
+                    JsonSerializerOptions options = new JsonSerializerOptions()
                     {
-                        //Read string request content
-                        var result = await request.Content.ReadAsStringAsync();
+                        PropertyNameCaseInsensitive = true
+                    };
 
-                        JsonSerializerOptions opt = new JsonSerializerOptions() { AllowTrailingCommas = true };
+                    //Deserialize the answer into a corresponding template list 
+                    List<ResultDto> response = JsonSerializer.Deserialize<List<ResultDto>>(apiRequest, options);
 
-                        //Deserialize the answer into a corresponding template list 
-                        List<ResultDto> response = JsonSerializer.Deserialize<List<ResultDto>>(result, opt);
-                        List<dynamic> test = JsonSerializer.Deserialize<List<dynamic>>(result, opt);
-
-                        //return json list
-                        return new JsonResult(test);
-                    }
-                    else
-                    {
-                        return new JsonResult("You request failure with status code: " + request.StatusCode);
-                    }
+                    //Return result
+                    return new JsonResult(response);
                 }
 
             }
