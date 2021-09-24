@@ -1,0 +1,9 @@
+@model List<CoreShared.ModelsDto.ResultDto>
+
+<div>
+    Partial para exibição do resultado dos calculos
+    @foreach (var item in Model)
+    {
+        <pre>{@item | json}</pre><br/>
+    }
+</div>
