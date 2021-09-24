@@ -22,20 +22,21 @@ namespace Web.Controllers
             UrlApi = _configuration.GetSection("ApiUrl").Value;
         }
 
-        [Route("/calculate")]
+        [HttpPost]
+        // [Route("/calculate")]
         public async Task<IActionResult> Calculate()
         {
             try
             {
                 //Disable certificate validation
                 HttpClientHandler clientHandler = new HttpClientHandler();
-                //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
                 //API request data
                 using (HttpClient cli = new HttpClient(clientHandler))
                 {
                     //API call
-                    var apiRequest = await cli.GetStringAsync(UrlApi + "/calculate");
+                    var jsonApiResponse = await cli.GetStringAsync(UrlApi + "/calculate");
 
                     //Json serializer options
                     JsonSerializerOptions options = new JsonSerializerOptions()
@@ -44,10 +45,11 @@ namespace Web.Controllers
                     };
 
                     //Deserialize the answer into a corresponding template list 
-                    List<ResultDto> response = JsonSerializer.Deserialize<List<ResultDto>>(apiRequest, options);
+                    List<ResultDto> responseDto = JsonSerializer.Deserialize<List<ResultDto>>(jsonApiResponse, options);
 
                     //Return result
-                    return new JsonResult(response);
+                    // return new JsonResult(responseDto);
+                    return PartialView("_calculatorResultPartial", responseDto);
                 }
 
             }
