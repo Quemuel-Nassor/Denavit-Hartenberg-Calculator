@@ -5,9 +5,19 @@
 
         <div class="text-center">
             Enter data in the fields and press the calculate button to get the results
-            <form #calculator asp-controller="Calculator" asp-action="Calculate" method="GET">
+            <form #calculator asp-controller="Calculator" asp-action="Calculate" 
+            method="POST" 
+            data-ajax-method="POST"
+            data-ajax="true"
+            data-ajax-mode="replace" 
+            data-ajax-update="#calculatorResult">
                 <button type="submit" class="btn btn-secondary">Calculate</button>
+
+        <div class="row" id="calculatorResult">
+            
+        </div>
             </form>
         </div>
+
     </div>
 </div>
