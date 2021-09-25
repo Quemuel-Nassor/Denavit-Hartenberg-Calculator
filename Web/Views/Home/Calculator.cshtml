@@ -1,21 +1,26 @@
-﻿<div class="text-center">
+﻿@model List<CoreShared.ModelsDto.CalculatorInput>
+<div class="text-center">
     <h1 class="display-5 my-5">@ViewData["Title"]</h1>
     <div class="text-justify mx-5">
-        <p>You can easily calculate coordinates to you project using this calculator.</p>
+        <p>You can easily calculate coordinates to your project using our calculator.</p>
 
         <div class="text-center">
-            Enter data in the fields and press the calculate button to get the results
-            <form #calculator asp-controller="Calculator" asp-action="Calculate" 
-            method="POST" 
-            data-ajax-method="POST"
-            data-ajax="true"
-            data-ajax-mode="replace" 
-            data-ajax-update="#calculatorResult">
+            Enter data in the fields and press the <strong>Calculate</strong> button to get the results
+
+            @*Submit form to request result with ajax to render calculator result*@ 
+            <form #calculator asp-controller="Calculator" asp-action="Calculate"
+                  method="GET"
+                  data-ajax-method="GET"
+                  data-ajax="true"
+                  data-ajax-mode="replace"
+                  data-ajax-update="#calculatorResult">
+
+
+                @*Submit button*@
                 <button type="submit" class="btn btn-secondary">Calculate</button>
 
-        <div class="row" id="calculatorResult">
-            
-        </div>
+                @*Submit result render*@
+                <div class="row mt-3" id="calculatorResult"></div>
             </form>
         </div>
 
