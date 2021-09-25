@@ -1,0 +1,19 @@
+@model List<CoreShared.ModelsDto.CalculatorResultDto>
+
+<div class="col-md-12 justify-content-around">
+    <div class="row bg-secondary text-white">
+        <div class="col-md-3 text-center border border-dark"><h4>Joint</h4></div>
+        <div class="col-md-3 text-center border border-dark"><h4>X</h4></div>
+        <div class="col-md-3 text-center border border-dark"><h4>Y</h4></div>
+        <div class="col-md-3 text-center border border-dark"><h4>Z</h4></div>
+    </div>
+    @foreach (var jointCoordinate in Model)
+    {
+        <div class="row">
+            <div class="col-md-3 border border-secondary">@jointCoordinate.Joint</div>
+            <div class="col-md-3 border border-secondary">@jointCoordinate.Xcoordinate</div>
+            <div class="col-md-3 border border-secondary">@jointCoordinate.Ycoordinate</div>
+            <div class="col-md-3 border border-secondary">@jointCoordinate.Zcoordinate</div>
+        </div>
+    }
+</div>
