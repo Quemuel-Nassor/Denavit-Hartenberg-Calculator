@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreShared.Constants;
+using CoreShared.ModelsDto;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,10 +15,16 @@ namespace Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly string UrlApi;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            IConfiguration configuration,
+            ILogger<HomeController> logger)
         {
             _logger = logger;
+            _configuration = configuration;
+            UrlApi = _configuration.GetSection("ApiUrl").Value + "/calculate";
         }
 
         [Route("/")]
@@ -29,6 +38,18 @@ namespace Web.Controllers
         public IActionResult Api()
         {
             ViewData["Title"] = "Api Documentation";
+
+            var queryString = @Url.ActionLink(null, null, new CalculatorInput(
+                    Convert.ToDecimal(2.5),
+                    Convert.ToDecimal(6.12),
+                    Convert.ToDecimal(8.22),
+                    Convert.ToDecimal(4.54),
+                    null)
+                );
+
+            ViewData["ApiEndpoint"] = UrlApi;
+            ViewData["Request"] = UrlApi + queryString.Substring(queryString.IndexOf("?"));
+
             return View();
         }
 

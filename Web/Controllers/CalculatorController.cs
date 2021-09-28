@@ -8,22 +8,17 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Web.Models;
 using Microsoft.Extensions.Configuration;
+using CoreShared.Constants;
 
 namespace Web.Controllers
 {
     public class CalculatorController : Controller
     {
         [HttpGet]
-        public async Task<IActionResult> Calculate()
+        public async Task<IActionResult> Calculate(CalculatorInput input)
         {
-            return ViewComponent("GetCalculatorResult");
+            return ViewComponent("GetCalculatorResult", input);
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> AddJoint()
-        //{
-        //    return ViewComponent("");
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
