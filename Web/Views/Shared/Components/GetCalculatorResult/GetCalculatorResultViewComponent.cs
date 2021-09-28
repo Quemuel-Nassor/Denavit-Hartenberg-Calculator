@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Web.Views.Shared.Components.Calculator
+namespace Web.Views.Shared.Components.GetCalculatorResult
 {
     [ViewComponent(Name = "GetCalculatorResult")]
     public class GetCalculatorResultViewComponent : ViewComponent
@@ -29,10 +29,10 @@ namespace Web.Views.Shared.Components.Calculator
         {
             _env = env;
             _configuration = configuration;
-            UrlApi = _configuration.GetSection("ApiUrl").Value;
+            UrlApi = _configuration.GetSection("ApiUrl").Value + "/calculate";
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(CalculatorInput input)
         {
             try
             {
@@ -47,7 +47,10 @@ namespace Web.Views.Shared.Components.Calculator
                 using (HttpClient cli = new HttpClient(clientHandler))
                 {
                     //API request already answered in json string format
-                    var jsonApiResponse = await cli.GetStringAsync(UrlApi + "/calculate");
+                    var queryString = @Url.ActionLink(null, null, input);
+                    var url = UrlApi + queryString.Substring(queryString.IndexOf("?"));
+
+                    var jsonApiResponse = await cli.GetStringAsync(url);
 
                     //Json serializer options (disable case sensitive deserialization)
                     JsonSerializerOptions options = new JsonSerializerOptions()
@@ -56,7 +59,7 @@ namespace Web.Views.Shared.Components.Calculator
                     };
 
                     //Deserialize the answer into a corresponding template list 
-                    List<CalculatorResultDto> responseDto = JsonSerializer.Deserialize<List<CalculatorResultDto>>(jsonApiResponse, options);
+                    CalculatorResultDto responseDto = JsonSerializer.Deserialize<CalculatorResultDto>(jsonApiResponse, options);
 
                     //Return result
                     return View(responseDto);
