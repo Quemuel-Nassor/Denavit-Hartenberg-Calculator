@@ -1,28 +1,74 @@
-﻿@model List<CoreShared.ModelsDto.CalculatorInput>
+﻿@using CoreShared.Constants
+@model CoreShared.ModelsDto.CalculatorInput
+
 <div class="text-center">
     <h1 class="display-5 my-5">@ViewData["Title"]</h1>
-    <div class="text-justify mx-5">
-        <p>You can easily calculate coordinates to your project using our calculator.</p>
-
-        <div class="text-center">
-            Enter data in the fields and press the <strong>Calculate</strong> button to get the results
-
-            @*Submit form to request result with ajax to render calculator result*@ 
-            <form #calculator asp-controller="Calculator" asp-action="Calculate"
-                  method="GET"
-                  data-ajax-method="GET"
-                  data-ajax="true"
-                  data-ajax-mode="replace"
-                  data-ajax-update="#calculatorResult">
+    <div class="text-justify">
+        You can easily calculate coordinates to your project using our calculator, enter data in the fields and press
+        the <strong>Calculate</strong> button to get the results
 
 
-                @*Submit button*@
-                <button type="submit" class="btn btn-secondary">Calculate</button>
+        @*Submit form to request result with ajax to render calculator result*@
+        <form class="my-4" #calculator asp-controller="Calculator" asp-action="Calculate" 
+            method="GET" 
+            data-ajax-method="GET"
+            data-ajax="true" 
+            data-ajax-mode="replace" 
+            data-ajax-update="#calculatorResult">
 
-                @*Submit result render*@
-                <div class="row mt-3" id="calculatorResult"></div>
-            </form>
-        </div>
+            <div class="col-md-12 px-0">
+                <div class="row w-auto">
+                    <div class="col-md-auto">
+                        <div class="form-group">
+                            <label asp-for="Theta" class="control-label">Angle &theta;</label>
+                            <input type="number" asp-for="Theta" min="0" required class="form-control">
+                            <span asp-validation-for="Theta" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="form-group">
+                            <label asp-for="DistanceD" class="control-label">Distance D</label>
+                            <input type="number" asp-for="DistanceD" min="0" required class="form-control">
+                            <span asp-validation-for="DistanceD" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="form-group">
+                            <label asp-for="DistanceA" class="control-label">Distance A</label>
+                            <input type="number" asp-for="DistanceA" min="0" required class="form-control">
+                            <span asp-validation-for="DistanceA" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="form-group">
+                            <label asp-for="Alpha" class="control-label">Angle &alpha;</label>
+                            <input type="number" asp-for="Alpha" required class="form-control">
+                            <span asp-validation-for="Alpha" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <input type="hidden" asp-for="Options" value="@ResultFormatOptions.F.ToString()">
+
+                    @*Submit button*@
+                    <div class="col-md-auto ml-auto">
+                        <div class="form-group pt-2">
+                            <label></label>
+                            <div class="row mx-auto">
+                                <button type="submit" class="btn btn-secondary">
+                                    <span>Calculate</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @*Submit result render*@
+            <div class="col-md-12 mt-4 px-0">
+                <div class="row w-100 mx-auto" id="calculatorResult"></div>
+            </div>
+        </form>
 
     </div>
 </div>

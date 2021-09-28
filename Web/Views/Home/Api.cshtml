@@ -1,6 +1,60 @@
 ﻿<div class="text-center">
     <h1 class="display-5 my-5">@ViewData["Title"]</h1>
-    <div class="text-justify mx-5">
-        <p>Here you will found documentation about hou integrate our Api into your application.</p>
+    <div class="text-justify">
+        Here you will find documentation on how to integrate our Api into your application
+
+        <div class="row w-100 mx-auto mt-4">Api endpoint:</div>
+        <div class="col-md-auto my-2">
+            <input class="form-control" type="text" readonly value=@ViewData["ApiEndpoint"] />
+        </div>
+
+        <div class="row w-100 mx-auto mt-4">Query parameters:</div>
+        <div class="col-md-auto my-2 justify-content-around">
+            <div class="row mx-auto bg-secondary text-white">
+                <div class="col-md-2 text-center border border-dark">
+                    <h4 class="align-text-top">Name</h4>
+                </div>
+                <div class="col-md-2 text-center border border-dark">
+                    <h4 class="align-text-top">Type</h4>
+                </div>
+                <div class="col-md-8 text-center border border-dark">
+                    <h4 class="align-text-top">Description</h4>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-2 text-left pl-3 border border-secondary">Theta (&theta;)</div>
+                <div class="col-md-2 text-center border border-secondary">decimal</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Theta angle between...</div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-2 text-left pl-3 border border-secondary">Distance D</div>
+                <div class="col-md-2 text-center border border-secondary">decimal</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Distance between axes ....</div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-2 text-left pl-3 border border-secondary">Distance A</div>
+                <div class="col-md-2 text-center border border-secondary">decimal</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Distance from axis .. .and axis .....</div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-2 text-left pl-3 border border-secondary">Alpha (&alpha;)</div>
+                <div class="col-md-2 text-center border border-secondary">decimal</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Alpha angle bewteen.....</div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-2 text-left pl-3 border border-secondary">Options (optional)</div>
+                <div class="col-md-2 text-center border border-secondary">string</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">
+                    V: verbose response format (descriptive)<br/>
+                    R: simple response, <strong>default</strong> if not specified (only coordinates: x, y, z)<br/>
+                    F: full response (descriptive with full data used to generate result)
+                </div>
+            </div>
+        </div>
+
+        <div class="row w-100 mx-auto mt-4">Example:</div>
+        <div class="col-md-auto my-2">
+            <input class="form-control w-100" type="text" readonly value=@ViewData["Request"] />
+        </div>
     </div>
 </div>
