@@ -40,11 +40,11 @@ namespace Web.Controllers
             ViewData["Title"] = "Api Documentation";
 
             var queryString = @Url.ActionLink(null, null, new CalculatorInput(
-                    2.5,
-                    6.12,
-                    8.22,
-                    4.54
-                    )
+                    Convert.ToDecimal(2.5),
+                    Convert.ToDecimal(6.12),
+                    Convert.ToDecimal(8.22),
+                    Convert.ToDecimal(4.54),
+                    null)
                 );
 
             ViewData["ApiEndpoint"] = UrlApi;
@@ -57,10 +57,7 @@ namespace Web.Controllers
         public IActionResult Calculator()
         {
             ViewData["Title"] = "Calculator";
-
-            var model = new ApiInput() { Joints = new List<CalculatorInput>() { new CalculatorInput() } };
-
-            return View(model);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
