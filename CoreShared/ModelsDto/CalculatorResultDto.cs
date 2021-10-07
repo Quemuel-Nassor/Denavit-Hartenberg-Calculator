@@ -5,11 +5,12 @@ namespace CoreShared.ModelsDto
     /// </summary>
     public class CalculatorResultDto
     {
-        public decimal Xcoordinate { get; set; }
-        public decimal Ycoordinate { get; set; }
-        public decimal Zcoordinate { get; set; }
+        public string Axis { get; set; }
+        public double Xcoordinate { get; set; }
+        public double Ycoordinate { get; set; }
+        public double Zcoordinate { get; set; }
 
-        public string[][] ResultMatrix { get; set; }
+        public string[][] MatrixAn { get; set; }
 
         /// <summary>
         /// Default constructor
@@ -25,13 +26,13 @@ namespace CoreShared.ModelsDto
         /// <param name="x"> X coordinate </param>
         /// <param name="y"> Y coordinate </param>
         /// <param name="z"> Z coordinate </param>
-        /// <param name="resultMatrix"> Matrix of calculated results </param>
-        public CalculatorResultDto(decimal x, decimal y, decimal z, string[][] resultMatrix)
+        /// <param name="matrixAn"> MatrixAn of calculated results </param>
+        public CalculatorResultDto(double x, double y, double z, string[][] matrixAn)
         {
             this.Xcoordinate = x;
             this.Ycoordinate = y;
             this.Zcoordinate = z;
-            this.ResultMatrix = resultMatrix;
+            this.MatrixAn = matrixAn;
         }
 
     }
