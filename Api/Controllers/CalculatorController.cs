@@ -14,16 +14,26 @@ namespace Api.Controllers
     [Route("/calculate")]
     public class CalculatorController : ControllerBase
     {
-        [HttpGet("/{data}")]
-        public async Task<JsonResult> Calculate([FromQuery] CalculatorInput data)
+        [HttpPost]
+        public async Task<JsonResult> Calculate(ApiInput data)
         {
             try
             {
-                var result = new CalculatorResultDto()
-                {
-                    Xcoordinate = Convert.ToDecimal(5.1),
-                    Ycoordinate = Convert.ToDecimal(7.22),
-                    Zcoordinate = Convert.ToDecimal(0.5232)
+                var result = new List<CalculatorResultDto>(){
+                    new CalculatorResultDto()
+                    {
+                        Axis = "j1",
+                        Xcoordinate = 5.1,
+                        Ycoordinate = 7.22,
+                        Zcoordinate = 0.5232
+                    },
+                    new CalculatorResultDto()
+                    {
+                        Axis = "j2",
+                        Xcoordinate = 5.1,
+                        Ycoordinate = 7.22,
+                        Zcoordinate = 0.5232
+                    }
                 };
 
                 return new JsonResult(
