@@ -19,14 +19,12 @@ namespace CoreShared.ModelsDto
         /// <param name="distanceD"> Distance D </param>
         /// <param name="distanceA"> Distance A </param>
         /// <param name="alpha"> Alpha Angle </param>
-        /// <param name="options"> Result Options </param>
-        public CalculatorInput(double theta, double distanceD, double distanceA, double alpha, string options)
+        public CalculatorInput(double theta, double distanceD, double distanceA, double alpha)
         {
             Theta = theta;
             DistanceD = distanceD;
             DistanceA = distanceA;
             Alpha = alpha;
-            if (!String.IsNullOrWhiteSpace(options)) Options = options;
         }
 
         [Required(ErrorMessage = nameof(Theta) + " is required")]
@@ -42,6 +40,5 @@ namespace CoreShared.ModelsDto
         public double Alpha { get; set; }
 
         public int Axis { get; set; }
-        public string Options { get; set; } = ResultFormatOptions.R.ToString();
     }
 }
