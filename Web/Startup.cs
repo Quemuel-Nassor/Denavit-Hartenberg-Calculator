@@ -57,7 +57,6 @@ namespace Web
 
             CultureInfo culture = new CultureInfo("pt-BR");
             culture.NumberFormat.NumberDecimalSeparator = ".";
-            culture.NumberFormat.NumberDecimalSeparator = ",";
 
             CultureInfo[] supportedCultures = new[] { culture };
 

@@ -8,7 +8,7 @@
             <input class="form-control" type="text" readonly value=@ViewData["ApiEndpoint"] />
         </div>
 
-        <div class="row w-100 mx-auto mt-4">Query parameters:</div>
+        <div class="row w-100 mx-auto mt-4">Parameters:</div>
         <div class="col-md-auto my-2 justify-content-around">
             <div class="row mx-auto bg-secondary text-white">
                 <div class="col-md-2 text-center border border-dark">
@@ -23,30 +23,37 @@
             </div>
             <div class="row mx-auto">
                 <div class="col-md-2 text-left pl-3 border border-secondary">Theta (&theta;)</div>
-                <div class="col-md-2 text-center border border-secondary">decimal</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">Joint angle obtained between the X<sub>i-1</sub> and X<sub>i</sub> axes on the Z<sub>i-1</sub> axis (using the right hand rule with the thumb in Z<sub>i-1</sub>)</div>
+                <div class="col-md-2 text-center border border-secondary">double</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Joint angle obtained between the
+                    X<sub>i-1</sub> and X<sub>i</sub> axes on the Z<sub>i-1</sub> axis (using the right hand rule with
+                    the thumb in Z<sub>i-1</sub>)</div>
             </div>
             <div class="row mx-auto">
                 <div class="col-md-2 text-left pl-3 border border-secondary">Distance D</div>
-                <div class="col-md-2 text-center border border-secondary">decimal</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">Distance between origin (<sub>i-1</sub>) iesimal coordinate system to the intersection of the Z<sub>i-1</sub> axis with the X<sub>i</sub> axis along the Z<sub>i-1</sub> axis</div>
+                <div class="col-md-2 text-center border border-secondary">double</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Distance between origin (<sub>i-1</sub>)
+                    iesimal coordinate system to the intersection of the Z<sub>i-1</sub> axis with the X<sub>i</sub>
+                    axis along the Z<sub>i-1</sub> axis</div>
             </div>
             <div class="row mx-auto">
                 <div class="col-md-2 text-left pl-3 border border-secondary">Distance A</div>
-                <div class="col-md-2 text-center border border-secondary">decimal</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">Distance between the intersection of the Z<sub>i-1</sub> axis with the X<sub>i</sub> axis to the origin of the iesimal reference system along X<sub>i</sub> (or shorter distance between the Z<sub>i-1</sub> and Z<sub>i</sub> axes)</div>
+                <div class="col-md-2 text-center border border-secondary">double</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Distance between the intersection of the
+                    Z<sub>i-1</sub> axis with the X<sub>i</sub> axis to the origin of the iesimal reference system along
+                    X<sub>i</sub> (or shorter distance between the Z<sub>i-1</sub> and Z<sub>i</sub> axes)</div>
             </div>
             <div class="row mx-auto">
                 <div class="col-md-2 text-left pl-3 border border-secondary">Alpha (&alpha;)</div>
-                <div class="col-md-2 text-center border border-secondary">decimal</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">Is the angle between the Z<sub>i-1</sub> and Z<sub>i</sub> axes measured on the X<sub>i</sub> axis (right hand rule)</div>
+                <div class="col-md-2 text-center border border-secondary">double</div>
+                <div class="col-md-8 text-left pl-3 border border-secondary">Is the angle between the Z<sub>i-1</sub>
+                    and Z<sub>i</sub> axes measured on the X<sub>i</sub> axis (right hand rule)</div>
             </div>
             <div class="row mx-auto">
                 <div class="col-md-2 text-left pl-3 border border-secondary">Options (optional)</div>
                 <div class="col-md-2 text-center border border-secondary">string</div>
                 <div class="col-md-8 text-left pl-3 border border-secondary">
-                    V: verbose response format (descriptive)<br/>
-                    R: simple response, <strong>default</strong> if not specified (only coordinates: x, y, z)<br/>
+                    V: verbose response format (descriptive)<br />
+                    R: simple response, <strong>default</strong> if not specified (only coordinates: x, y, z)<br />
                     F: full response (descriptive with full data used to generate result)
                 </div>
             </div>
@@ -54,7 +61,29 @@
 
         <div class="row w-100 mx-auto mt-4">Example:</div>
         <div class="col-md-auto my-2">
-            <input class="form-control w-100" type="text" readonly value=@ViewData["Request"] />
+            <pre style="background-color: #e9ecef; opacity: 1; border-radius: .25rem;"> 
+                <code>
+                $ curl @ViewData["ApiEndpoint"] -X POST -v -H "Content-type: application/json"
+                   -d '{
+                            "Options": "F",
+                            "Joints":
+                            [
+                                {
+                                    "Theta": 0.85091,
+                                    "DistanceD": 56,
+                                    "DistanceA": 0.83,
+                                    "Alpha": 0.52532
+                                },
+                                {
+                                    "Theta": 0.52532,
+                                    "DistanceD": 32,
+                                    "DistanceA": 0.87,
+                                    "Alpha": 0.85091
+                                }
+                            ]
+                        }'
+            </code>
+            </pre>
         </div>
     </div>
 </div>
