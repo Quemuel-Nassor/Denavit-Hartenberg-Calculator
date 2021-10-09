@@ -57,7 +57,7 @@ namespace Web.Views.Shared.Components.GetCalculatorResult
                     };
 
                     //Serialize input model
-                    var jsonInputString = JsonSerializer.Serialize(input);
+                    var jsonInputString = JsonSerializer.Serialize(input,options);
                     var content = new StringContent(jsonInputString, Encoding.UTF8, MediaTypeNames.Application.Json);
 
                     //Post request on API
