@@ -39,15 +39,7 @@ namespace Web.Controllers
         {
             ViewData["Title"] = "Api Documentation";
 
-            var queryString = @Url.ActionLink(null, null, new CalculatorInput(
-                    2.5,
-                    6.12,
-                    8.22,
-                    4.54)
-                );
-
             ViewData["ApiEndpoint"] = UrlApi;
-            ViewData["Request"] = UrlApi + queryString.Substring(queryString.IndexOf("?"));
 
             return View();
         }
