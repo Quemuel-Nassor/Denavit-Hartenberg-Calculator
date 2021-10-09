@@ -39,6 +39,5 @@ namespace CoreShared.ModelsDto
         [Required(ErrorMessage = nameof(Alpha) + " is required")]
         public double Alpha { get; set; }
 
-        public int Axis { get; set; }
     }
 }
