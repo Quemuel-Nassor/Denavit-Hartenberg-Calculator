@@ -6,10 +6,6 @@ namespace CoreShared.Constants
     public enum ResultFormatOptions
     {
         /// <summary>
-        /// Verbose response
-        /// </summary>
-        V,
-        /// <summary>
         /// Simple response
         /// </summary>
         R,
