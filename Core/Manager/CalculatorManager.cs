@@ -4,16 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Core.Manager;
+using System.Text.Json;
 
-public class CalculatorManager
+public class CalculatorManager : ICalculatorManager
 {
     /// <summary>
     /// Array for multiplication and obtaining coordinates
     /// </summary>
-    static readonly double[,] MultiplierArray = { { 0 }, { 0 }, { 0 }, { 1 } };
+    private readonly double[,] MultiplierArray = new double[4, 1];
 
     public CalculatorManager()
     {
+        MultiplierArray.SetValue(0,0,0);
+        MultiplierArray.SetValue(0,1,0);
+        MultiplierArray.SetValue(0,2,0);
+        MultiplierArray.SetValue(1,3,0);
     }
 
     /// <summary>
@@ -22,21 +28,35 @@ public class CalculatorManager
     /// <param name="input">Parameters to generate matrix</param>
     /// <returns> AnMatrix </returns>
     /// <exception cref="Exception"> Generic exception </exception>
-    static double[,] GenerateMatrixAn(CalculatorInput input)
+    public double[,] GenerateMatrixAn(CalculatorInput input)
     {
         try
         {
             double[,] MatrixAi = new double[4, 4];
-            MatrixAi.SetValue(new double[4] { Math.Cos(input.Theta), (-Math.Cos(input.Alpha) * Math.Sin(input.Theta)), Math.Sin(input.Alpha) * Math.Sin(input.Theta), input.DistanceA * Math.Cos(input.Theta) }, 0);
-            MatrixAi.SetValue(new double[4] { Math.Sin(input.Theta), Math.Cos(input.Alpha) * Math.Cos(input.Theta), (-Math.Sin(input.Alpha) * Math.Cos(input.Theta)), input.DistanceA * Math.Sin(input.Theta) }, 1);
-            MatrixAi.SetValue(new double[4] { 0, Math.Sin(input.Alpha), Math.Cos(input.Alpha), input.DistanceD }, 2);
-            MatrixAi.SetValue(new double[4] { 0, 0, 0, 1 }, 3);
-            //{
-            //    new double[4]{ Math.Cos(input.Theta), (-Math.Cos(input.Alpha) * Math.Sin(input.Theta)), Math.Sin(input.Alpha) * Math.Sin(input.Theta)   , input.DistanceA * Math.Cos(input.Theta) },
-            //    new double[4]{ Math.Sin(input.Theta), Math.Cos(input.Alpha) * Math.Cos(input.Theta)   , (-Math.Sin(input.Alpha) * Math.Cos(input.Theta)), input.DistanceA * Math.Sin(input.Theta) },
-            //    new double[4]{ 0                    , Math.Sin(input.Alpha)                           , Math.Cos(input.Alpha)                           , input.DistanceD                         },
-            //    new double[4]{ 0                    , 0                                               , 0                                               , 1                                       },
-            //};
+
+            // row 0
+            MatrixAi.SetValue(Math.Cos(input.Theta), 0, 0);
+            MatrixAi.SetValue((-Math.Cos(input.Alpha) * Math.Sin(input.Theta)), 0, 1);
+            MatrixAi.SetValue(Math.Sin(input.Alpha) * Math.Sin(input.Theta), 0, 2);
+            MatrixAi.SetValue(input.DistanceA * Math.Cos(input.Theta), 0, 3);
+
+            // row 1
+            MatrixAi.SetValue(Math.Sin(input.Theta), 1, 0);
+            MatrixAi.SetValue(Math.Cos(input.Alpha) * Math.Cos(input.Theta), 1, 1);
+            MatrixAi.SetValue((-Math.Sin(input.Alpha) * Math.Cos(input.Theta)), 1, 2);
+            MatrixAi.SetValue(input.DistanceA * Math.Sin(input.Theta), 1, 3);
+
+            // row 2
+            MatrixAi.SetValue(0, 2, 0);
+            MatrixAi.SetValue(Math.Sin(input.Alpha), 2, 1);
+            MatrixAi.SetValue(Math.Cos(input.Alpha), 2, 2);
+            MatrixAi.SetValue(input.DistanceD, 2, 3);
+
+            // row 3
+            MatrixAi.SetValue(0, 3, 0);
+            MatrixAi.SetValue(0, 3, 1);
+            MatrixAi.SetValue(0, 3, 2);
+            MatrixAi.SetValue(1, 3, 3);
 
             return MatrixAi;
         }
@@ -54,12 +74,12 @@ public class CalculatorManager
     /// <returns> Matricial product of A by B </returns>
     /// <exception cref="InvalidOperationException"> If cols A are different from rows B </exception>
     /// <exception cref="Exception"> Generic exception </exception>
-    static double[,] MatrixProduct(double[,] MatrixA, double[,] MatrixB)
+    public double[,] MatrixProduct(double[,] MatrixA, double[,] MatrixB)
     {
         try
         {
             //Get row and col number from A and B
-            int rowsA = MatrixA.Rank, rowsB = MatrixB.Rank;
+            int rowsA = MatrixA.GetLength(0), rowsB = MatrixB.GetLength(0);
             int colsA = MatrixA.GetLength(1), colsB = MatrixB.GetLength(1);
 
             if (colsA != rowsB) throw new InvalidOperationException("The number of columns at matrix A need be equals the number of rows at matrix B");
@@ -67,20 +87,27 @@ public class CalculatorManager
             //Mount result matrix with rowsA and colsB of size
             double[,] result = new double[rowsA, colsB];
 
-            //Parallel.For(0, colsA, index =>
-            //    result[index] = new double[colsB]
-            //);
-
             //Parallels the operations of each line
             Parallel.For(0, rowsA, rowA =>
             {
+                if(colsB==1) Console.WriteLine("percorrendo linhaA {0} ", rowA);
                 for (int colB = 0; colB < colsB; colB++)
                 {
-                    for (int i = 0; i < colsB; i++)
+                if(colsB==1) Console.WriteLine("percorrendo colB {0} ", colB);
+                    for (int i = 0; i < colsA; i++)
                     {
-                        //result[rowA][colB] += MatrixA.GetValue(rowA,colB) * MatrixB.GetValue(colB,rowA);
-                        var value = Convert.ToDouble(MatrixA.GetValue(rowA, colB)) * Convert.ToDouble(MatrixB.GetValue(colB, rowA));
-                        result.SetValue(Convert.ToDouble(result.GetValue(rowA, colB)) + value, rowA, colsB);
+                        if (result.GetValue(rowA, colB) == null) 
+                            result.SetValue(0, rowA, colB);
+
+                        var resultValue = Convert.ToDouble(result.GetValue(rowA, colB));
+                        var product = (Convert.ToDouble(MatrixA.GetValue(rowA, i)) * Convert.ToDouble(MatrixB.GetValue(i, rowA)));
+
+                        if(colsB==1) Console.WriteLine("mA[{0}][{1}] = {2}",rowA, i,MatrixA.GetValue(rowA, i));
+                        if(colsB==1) Console.WriteLine("mB[{0}][{1}] = {2}",i, rowA,MatrixB.GetValue(i, rowA));
+                        if(colsB==1) Console.WriteLine("result[{0}][{1}] = {2}",rowA, colB, product);
+
+                        var value = resultValue + product;//Convert.ToDouble(result.GetValue(rowA, rowB)) + (Convert.ToDouble(MatrixA.GetValue(rowA, i)) * Convert.ToDouble(MatrixB.GetValue(i, rowA)));
+                        result.SetValue(value, rowA, colB);
 
                     }
                 }
@@ -101,7 +128,7 @@ public class CalculatorManager
     /// <param name="listMatrixes"> List of matrixes An </param>
     /// <returns> A0Matrix </returns>
     /// <exception cref="Exception"> Generic exception </exception>
-    static double[,] GenerateMatrixA0(List<double[,]> listMatrixes)
+    public double[,] GenerateMatrixA0(List<double[,]> listMatrixes)
     {
         try
         {
@@ -140,25 +167,18 @@ public class CalculatorManager
     /// Method to populate result 
     /// </summary>
     /// <param name="MatrixA0"> Matrix A0 </param>
-    /// <param name="input"> calcu </param>
+    /// <param name="input"> input parameters data list </param>
     /// <returns></returns>
-    static CalculatorResultDto GetResult(double[,] MatrixA0, CalculatorInput input)
+    public ApiOutput GetResult(double[,] MatrixA0, List<CalculatorResultDto> input)
     {
 
-        var coordinates = MatrixProduct(MatrixA0, MultiplierArray);
-
-        CalculatorResultDto result = new CalculatorResultDto(
-            x: Convert.ToDouble(coordinates.GetValue(0, 0)),
-            y: Convert.ToDouble(coordinates.GetValue(1, 0)),
-            z: Convert.ToDouble(coordinates.GetValue(2, 0)),
-            matrixAn:
-                new string[4][]{
-                        new string[]{ String.Format("Cos({0})",input.Theta), String.Format("-Cos({0}) * Sin({1})",input.Alpha,input.Theta), String.Format("Sin({0}) * Sin({1})",input.Alpha,input.Theta), String.Format("{0} * Cos({1})",input.DistanceA,input.Theta) },
-                        new string[]{ String.Format("Sin({0})",input.Theta), String.Format("Cos({0}) * Cos({1})",input.Alpha,input.Theta), String.Format("-Sin({0}) * Cos({1})",input.Alpha,input.Theta), String.Format("{0} * Sin({1})",input.DistanceA,input.Theta) },
-                        new string[]{ "0", String.Format("Sin({0})",input.Alpha), String.Format("Cos({0})",input.Alpha), input.DistanceD.ToString() },
-                        new string[]{"0", "0", "0", "1" },
-                    }
-                );
+        ApiOutput result = new ApiOutput()
+        {
+            Xcoordinate = Convert.ToDouble(MatrixA0.GetValue(0, 3)),
+            Ycoordinate = Convert.ToDouble(MatrixA0.GetValue(1, 3)),
+            Zcoordinate = Convert.ToDouble(MatrixA0.GetValue(2, 3)),
+            Joints = input
+        };
 
         return result;
     }
