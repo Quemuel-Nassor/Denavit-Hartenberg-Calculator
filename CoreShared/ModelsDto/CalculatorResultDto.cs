@@ -6,9 +6,7 @@ namespace CoreShared.ModelsDto
     public class CalculatorResultDto
     {
         public string Axis { get; set; }
-        public double Xcoordinate { get; set; }
-        public double Ycoordinate { get; set; }
-        public double Zcoordinate { get; set; }
+        public CalculatorInput InputData { get; set; }
 
         public string[][] MatrixAn { get; set; }
 
@@ -21,19 +19,16 @@ namespace CoreShared.ModelsDto
         }
 
         /// <summary>
-        /// Overloaded constructor
+        /// Overloaded consturctor
         /// </summary>
-        /// <param name="x"> X coordinate </param>
-        /// <param name="y"> Y coordinate </param>
-        /// <param name="z"> Z coordinate </param>
-        /// <param name="matrixAn"> MatrixAn of calculated results </param>
-        public CalculatorResultDto(double x, double y, double z, string[][] matrixAn)
+        /// <param name="axis"> current axis </param>
+        /// <param name="inputData"> input parameters </param>
+        /// <param name="matrixAn"> matrix An to this axis </param>
+        public CalculatorResultDto(string axis, CalculatorInput inputData, string[][] matrixAn)
         {
-            this.Xcoordinate = x;
-            this.Ycoordinate = y;
-            this.Zcoordinate = z;
-            this.MatrixAn = matrixAn;
+            Axis = axis;
+            InputData = inputData;
+            MatrixAn = matrixAn;
         }
-
     }
 }

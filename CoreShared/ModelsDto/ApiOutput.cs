@@ -1,0 +1,15 @@
+using CoreShared.Constants;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CoreShared.ModelsDto
+{
+    public class ApiOutput
+    {
+        public double Xcoordinate { get; set; }
+        public double Ycoordinate { get; set; }
+        public double Zcoordinate { get; set; }
+        public List<CalculatorResultDto> Joints { get; set; }
+    }
+}
