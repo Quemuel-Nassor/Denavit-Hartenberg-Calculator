@@ -10,6 +10,7 @@ namespace CoreShared.ModelsDto
         public double Xcoordinate { get; set; }
         public double Ycoordinate { get; set; }
         public double Zcoordinate { get; set; }
+        public List<List<double>> MatrixA0 { get; set; }
         public List<CalculatorResultDto> Joints { get; set; }
     }
 }
