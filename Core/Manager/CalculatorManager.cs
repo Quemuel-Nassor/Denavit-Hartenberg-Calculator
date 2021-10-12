@@ -171,6 +171,8 @@ public class CalculatorManager : ICalculatorManager
     /// <returns></returns>
     public ApiOutput GetResult(double[,] MatrixA0, List<CalculatorResultDto> input)
     {
+        int rows = MatrixA0.GetLength(0);
+        int cols = MatrixA0.GetLength(1);
 
         ApiOutput result = new ApiOutput()
         {
@@ -179,6 +181,18 @@ public class CalculatorManager : ICalculatorManager
             Zcoordinate = Convert.ToDouble(MatrixA0.GetValue(2, 3)),
             Joints = input
         };
+
+        result.MatrixA0 = new List<List<double>>();
+
+        for (int i = 0; i < rows; i++)
+        {
+            result.MatrixA0.Add(new List<double>());
+
+            for (int j = 0; j < cols; j++)
+            {
+                result.MatrixA0[i].Add((double)MatrixA0.GetValue(i, j));
+            }
+        }
 
         return result;
     }
