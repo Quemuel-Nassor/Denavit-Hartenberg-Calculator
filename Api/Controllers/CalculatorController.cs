@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Manager;
 using CoreShared.Constants;
+using System.Net.Http;
+using System.Text;
+using System.Net.Mime;
 
 namespace Api.Controllers
 {
@@ -27,6 +30,12 @@ namespace Api.Controllers
         {
             try
             {
+                //Json serializer options (disable case sensitive deserialization)
+                JsonSerializerOptions options = new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
                 List<double[,]> listMatrixesAn = new List<double[,]>();
                 List<CalculatorResultDto> Joints = new List<CalculatorResultDto>();
                 int index = 0;
@@ -38,16 +47,15 @@ namespace Api.Controllers
                     listMatrixesAn.Add(_manager.GenerateMatrixAn(joint));
                     if (data.Options.Equals(ResultFormatOptions.F.ToString()))
                     {
-                        Joints.Add(new CalculatorResultDto(
-                            "j" + index.ToString(),
-                            joint,
-                            new string[4][]{
-                            new string[]{ String.Format("Cos({0})",joint.Theta), String.Format("-Cos({0}) * Sin({1})",joint.Alpha,joint.Theta), String.Format("Sin({0}) * Sin({1})",joint.Alpha,joint.Theta), String.Format("{0} * Cos({1})",joint.DistanceA,joint.Theta) },
-                            new string[]{ String.Format("Sin({0})",joint.Theta), String.Format("Cos({0}) * Cos({1})",joint.Alpha,joint.Theta), String.Format("-Sin({0}) * Cos({1})",joint.Alpha,joint.Theta), String.Format("{0} * Sin({1})",joint.DistanceA,joint.Theta) },
-                            new string[]{ "0", String.Format("Sin({0})",joint.Alpha), String.Format("Cos({0})",joint.Alpha), joint.DistanceD.ToString() },
-                            new string[]{ "0", "0", "0", "1" },
+                        Joints.Add(new CalculatorResultDto(){
+                            InputData = joint,
+                            MatrixAn = new string[4][]{
+                                new string[] { String.Format("Cos({0})",joint.Theta), String.Format("-Cos({0}) * Sin({1})",joint.Alpha,joint.Theta), String.Format("Sin({0}) * Sin({1})",joint.Alpha,joint.Theta), String.Format("{0} * Cos({1})",joint.DistanceA,joint.Theta) },
+                                new string[] { String.Format("Sin({0})",joint.Theta), String.Format("Cos({0}) * Cos({1})",joint.Alpha,joint.Theta), String.Format("-Sin({0}) * Cos({1})",joint.Alpha,joint.Theta), String.Format("{0} * Sin({1})",joint.DistanceA,joint.Theta) },
+                                new string[] { "0", String.Format("Sin({0})",joint.Alpha), String.Format("Cos({0})",joint.Alpha), joint.DistanceD.ToString() },
+                                new string[] { "0", "0", "0", "1" }
                             }
-                            ));
+                        });
                     }
                     index++;
                 }
@@ -58,7 +66,7 @@ namespace Api.Controllers
                 var result = _manager.GetResult(MatrixA0, Joints);
 
                 return new JsonResult(
-                        result
+                        result,options
                     );
             }
             catch (Exception error)
