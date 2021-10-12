@@ -1,32 +1,71 @@
-@model List<CoreShared.ModelsDto.CalculatorResultDto>
+@model CoreShared.ModelsDto.ApiOutput
 
-<div class="row w-100 mx-auto my-2"><h4>Result</h4></div>
+@* Result coordinates *@
+<div class="row w-100 mx-auto my-2"><h4>Coordinates </h4></div>
 <div class="col-md-12 justify-content-around">
     <div class="row bg-secondary text-white">
-
-        <div class="col-md-3 text-center border border-dark">
-            <h4 class="align-text-top">Joint</h4>
-        </div>
-        <div class="col-md-3 text-center border border-dark">
+        <div class="col-md-4 text-center border border-dark">
             <h4 class="align-text-top">X</h4>
         </div>
-        <div class="col-md-3 text-center border border-dark">
+        <div class="col-md-4 text-center border border-dark">
             <h4 class="align-text-top">Y</h4>
         </div>
-        <div class="col-md-3 text-center border border-dark">
+        <div class="col-md-4 text-center border border-dark">
             <h4 class="align-text-top">Z</h4>
         </div>
     </div>
-    @foreach (var jointCoordinate in Model)
-    {
+     <div class="row">
+        <div class="col-md-4 text-center border border-secondary">@Model.Xcoordinate</div>
+        <div class="col-md-4 text-center border border-secondary">@Model.Ycoordinate</div>
+        <div class="col-md-4 text-center border border-secondary">@Model.Zcoordinate</div>
+    </div> 
+</div>
+
+@* Matrix A0 *@
+<div class="row w-100 mx-auto mb-2 mt-4"><h4>MAtrix A<sub>0</sub> </h4></div>
+<div class="col-md-12 border mb-4 justify-content-around">
+    @foreach(var row in @Model.MatrixA0){
         <div class="row">
-            <div class="col-md-3 text-center border border-secondary">@jointCoordinate.Axis</div>
-            <div class="col-md-3 text-center border border-secondary">@jointCoordinate.Xcoordinate</div>
-            <div class="col-md-3 text-center border border-secondary">@jointCoordinate.Ycoordinate</div>
-            <div class="col-md-3 text-center border border-secondary">@jointCoordinate.Zcoordinate</div>
+        @foreach(var col in row){
+            <div class="col-md-3 border text-center">
+                @Math.Round(@col,5)
+            </div>
+        }
         </div>
     }
 </div>
-<div class="col-md-12">
+    
+@for(int i = 0; i< Model.Joints.Count; i++)
+{
 
-</div>
+    <div class="row w-100 mx-auto mt-4 mb-2"><h4>Joint @i</h4></div>
+    <div class="col-md-12">
+        <div class="row border justify-content-around">
+            <div class="col-md-3 border text-center">
+                <strong>Angle &theta;:</strong> @Model.Joints[i].InputData.Theta
+            </div>
+            <div class="col-md-3 border text-center">
+                <strong>Distance D:</strong> @Model.Joints[i].InputData.DistanceD
+            </div>
+            <div class="col-md-3 border text-center">
+                <strong>Distance A:</strong> @Model.Joints[i].InputData.DistanceA
+            </div>
+            <div class="col-md-3 border text-center">
+                <strong>Angle &alpha;:</strong> @Model.Joints[i].InputData.Alpha
+            </div>
+        </div>
+    </div>
+
+    <div class="row w-100 mx-auto mt-4 mb-2"><h4>Matrix A<sub>@i</sub></h4></div>
+    <div class="col-md-12 border justify-content-around">
+        @foreach(var row in @Model.Joints[i].MatrixAn){
+            <div class="row">
+            @foreach(var col in row){
+                <div class="col-md-3 border text-center">
+                    @col
+                </div>
+            }
+            </div>
+        }
+    </div>
+}

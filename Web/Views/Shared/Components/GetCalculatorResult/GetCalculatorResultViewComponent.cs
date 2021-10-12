@@ -38,7 +38,7 @@ namespace Web.Views.Shared.Components.GetCalculatorResult
         {
             try
             {
-                List<CalculatorResultDto> responseDto = new List<CalculatorResultDto>();
+                ApiOutput responseDto = new ApiOutput();
 
                 //Disable ssl certificate validation (for linux environtments)
                 HttpClientHandler clientHandler = new HttpClientHandler();
@@ -68,7 +68,7 @@ namespace Web.Views.Shared.Components.GetCalculatorResult
 
                     //Deserialize response
                     var responseContent = await jsonApiResponse.Content.ReadAsStringAsync();
-                    responseDto = JsonSerializer.Deserialize<List<CalculatorResultDto>>(responseContent, options);
+                    responseDto = JsonSerializer.Deserialize<ApiOutput>(responseContent, options);
 
                     //Return result
                     return View(responseDto);
