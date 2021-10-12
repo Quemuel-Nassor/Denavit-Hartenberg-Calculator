@@ -154,6 +154,7 @@ public class CalculatorManager : ICalculatorManager
 
             //Recursion to reduce list to a single element
             if (productList.Count > 1) GenerateMatrixA0(productList);
+            if (listMatrixes.Count == 1) productList.Add(listMatrixes.FirstOrDefault());
 
             return productList.FirstOrDefault();
         }
