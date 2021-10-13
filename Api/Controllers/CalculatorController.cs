@@ -44,18 +44,11 @@ namespace Api.Controllers
                 //Generate An matrixes
                 foreach (var joint in data.Joints)
                 {
-                    listMatrixesAn.Add(_manager.GenerateMatrixAn(joint));
+                    var matrixAn = _manager.GenerateMatrixAn(joint);
+                    listMatrixesAn.Add(matrixAn);
                     if (data.Options.Equals(ResultFormatOptions.F.ToString()))
                     {
-                        Joints.Add(new CalculatorResultDto(){
-                            InputData = joint,
-                            MatrixAn = new string[4][]{
-                                new string[] { String.Format("Cos({0})",joint.Theta), String.Format("-Cos({0}) * Sin({1})",joint.Alpha,joint.Theta), String.Format("Sin({0}) * Sin({1})",joint.Alpha,joint.Theta), String.Format("{0} * Cos({1})",joint.DistanceA,joint.Theta) },
-                                new string[] { String.Format("Sin({0})",joint.Theta), String.Format("Cos({0}) * Cos({1})",joint.Alpha,joint.Theta), String.Format("-Sin({0}) * Cos({1})",joint.Alpha,joint.Theta), String.Format("{0} * Sin({1})",joint.DistanceA,joint.Theta) },
-                                new string[] { "0", String.Format("Sin({0})",joint.Alpha), String.Format("Cos({0})",joint.Alpha), joint.DistanceD.ToString() },
-                                new string[] { "0", "0", "0", "1" }
-                            }
-                        });
+                        Joints.Add(new CalculatorResultDto(joint,matrixAn));
                     }
                     index++;
                 }
