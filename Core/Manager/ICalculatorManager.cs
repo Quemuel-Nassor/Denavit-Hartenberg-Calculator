@@ -33,7 +33,7 @@ namespace Core.Manager{
         /// <param name="listMatrixes"> List of matrixes An </param>
         /// <returns> A0Matrix </returns>
         /// <exception cref="Exception"> Generic exception </exception>
-        public double[,] GenerateMatrixA0(List<double[,]> listMatrixes);
+        public double[,] GenerateMatrixA0(ref List<double[,]> listMatrixes);
 
         /// <summary>
         /// Method to populate result 

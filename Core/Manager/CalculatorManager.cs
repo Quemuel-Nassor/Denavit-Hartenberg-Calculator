@@ -16,10 +16,10 @@ public class CalculatorManager : ICalculatorManager
 
     public CalculatorManager()
     {
-        MultiplierArray.SetValue(0,0,0);
-        MultiplierArray.SetValue(0,1,0);
-        MultiplierArray.SetValue(0,2,0);
-        MultiplierArray.SetValue(1,3,0);
+        MultiplierArray.SetValue(0, 0, 0);
+        MultiplierArray.SetValue(0, 1, 0);
+        MultiplierArray.SetValue(0, 2, 0);
+        MultiplierArray.SetValue(1, 3, 0);
     }
 
     /// <summary>
@@ -90,21 +90,15 @@ public class CalculatorManager : ICalculatorManager
             //Parallels the operations of each line
             Parallel.For(0, rowsA, rowA =>
             {
-                if(colsB==1) Console.WriteLine("percorrendo linhaA {0} ", rowA);
                 for (int colB = 0; colB < colsB; colB++)
                 {
-                if(colsB==1) Console.WriteLine("percorrendo colB {0} ", colB);
                     for (int i = 0; i < colsA; i++)
                     {
-                        if (result.GetValue(rowA, colB) == null) 
+                        if (result.GetValue(rowA, colB) == null)
                             result.SetValue(0, rowA, colB);
 
                         var resultValue = Convert.ToDouble(result.GetValue(rowA, colB));
-                        var product = (Convert.ToDouble(MatrixA.GetValue(rowA, i)) * Convert.ToDouble(MatrixB.GetValue(i, rowA)));
-
-                        if(colsB==1) Console.WriteLine("mA[{0}][{1}] = {2}",rowA, i,MatrixA.GetValue(rowA, i));
-                        if(colsB==1) Console.WriteLine("mB[{0}][{1}] = {2}",i, rowA,MatrixB.GetValue(i, rowA));
-                        if(colsB==1) Console.WriteLine("result[{0}][{1}] = {2}",rowA, colB, product);
+                        var product = (Convert.ToDouble(MatrixA.GetValue(rowA, i)) * Convert.ToDouble(MatrixB.GetValue(i, colB)));
 
                         var value = resultValue + product;//Convert.ToDouble(result.GetValue(rowA, rowB)) + (Convert.ToDouble(MatrixA.GetValue(rowA, i)) * Convert.ToDouble(MatrixB.GetValue(i, rowA)));
                         result.SetValue(value, rowA, colB);
@@ -128,11 +122,13 @@ public class CalculatorManager : ICalculatorManager
     /// <param name="listMatrixes"> List of matrixes An </param>
     /// <returns> A0Matrix </returns>
     /// <exception cref="Exception"> Generic exception </exception>
-    public double[,] GenerateMatrixA0(List<double[,]> listMatrixes)
+    public double[,] GenerateMatrixA0(ref List<double[,]> listMatrixes)
     {
         try
         {
             List<double[,]> productList = new List<double[,]>();
+
+            if (listMatrixes.Count == 1) productList.Add(listMatrixes.FirstOrDefault());
 
             for (int i = 1; i < listMatrixes.Count; i += 2)
             {
@@ -153,9 +149,11 @@ public class CalculatorManager : ICalculatorManager
             }
 
             //Recursion to reduce list to a single element
-            if (productList.Count > 1) GenerateMatrixA0(productList);
-            if (listMatrixes.Count == 1) productList.Add(listMatrixes.FirstOrDefault());
-
+            if (productList.Count > 1)
+            {
+                GenerateMatrixA0(ref productList);
+            }
+            listMatrixes = productList;
             return productList.FirstOrDefault();
         }
         catch (Exception error)

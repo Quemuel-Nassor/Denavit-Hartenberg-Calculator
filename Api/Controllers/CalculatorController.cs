@@ -54,7 +54,7 @@ namespace Api.Controllers
                 }
 
                 //Generate Matrix A0
-                double[,] MatrixA0 = _manager.GenerateMatrixA0(listMatrixesAn);
+                double[,] MatrixA0 = _manager.GenerateMatrixA0(ref listMatrixesAn);
 
                 var result = _manager.GetResult(MatrixA0, Joints);
 
