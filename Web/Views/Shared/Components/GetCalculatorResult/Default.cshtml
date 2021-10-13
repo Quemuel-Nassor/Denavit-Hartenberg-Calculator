@@ -56,15 +56,15 @@
         </div>
     </div>
 
-    <div class="row w-100 mx-auto mt-4 mb-2"><h4>Matrix A<sub>@i</sub></h4></div>
+    <div class="row w-100 mx-auto mt-4 mb-2"><h4>Matrix <sup>@i</sup>A<sub>@(i+1)</sub></h4></div>
     <div class="col-md-12 border justify-content-around">
         @foreach(var row in @Model.Joints[i].MatrixAn){
             <div class="row">
-            @foreach(var col in row){
-                <div class="col-md-3 border text-center">
-                    @col
-                </div>
-            }
+                @foreach(var col in row){
+                    <div class="col-md-3 border text-center">
+                        @Math.Round(@col,5)
+                    </div>
+                }
             </div>
         }
     </div>
