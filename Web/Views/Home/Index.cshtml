@@ -1,7 +1,97 @@
-﻿<div class="text-center">
+﻿<style>
+    .matrix
+    {
+        width: 30px;
+        padding: 0 9px;
+        border-width: 0px 1px;
+        border-color: #dee2e6;
+        border-style: solid;
+    }
+</style>
+<div class="text-center">
     <h1 class="display-5 my-5">Welcome to Denavit Hartenberg calculator</h1>
     <div class="text-justify">
         This site was created to provide a coordinate calculation tool for automation coordinates and robotics, you can also use our @Html.ActionLink("Api", "Api", "Home") if you want to integrate our solution into your application
-        <h3 class="my-5">What is the Denavit Hartenberg method?</h3>
+        <h3 class="my-5">What is the Denavit Hartenberg convention?</h3>
+
+        <div class="text-center">
+            <div class="text-justify">
+                It is a convention created to systematize the input of a cinematographic model from 4 parameters for each articulation (joint) of a robot.<br/>
+                There are four DH parameters:<br/><br/>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>&theta;<sub>i</sub></span>: angle between adjacent links<br/>
+                        <span>d<sub>i</sub></span>: distance between adjacent links<br/>
+                        <span>a<sub>i</sub></span>: shortest distance between joint axes<br/>
+                        <span>&alpha;<sub>i</sub></span>: joint link twist<br/>
+                    </div>
+
+                    <div class="col-md-8">
+                        <img style="max-height: 300px;" src="~/assets/images/Classic-DHparameters.png">
+                    </div>
+                </div><br/>
+
+                The homogeneous transformation matrix (<sup>i-1</sup>A<sub>i</sub>) is used to produce a composite transformation matrix which in turn is used to obtain the desired coordinates<br/><br/>
+
+                <sup>i-1</sup>A<sub>i</sub>
+                <div class="col-md-12 border justify-content-around">
+                    <div class="row">
+                        <div class="col-md-3 border text-center"> Cos(&theta;) </div>
+                        <div class="col-md-3 border text-center"> -Cos(&alpha;) * Sin(&theta;) </div>
+                        <div class="col-md-3 border text-center"> Sin(&alpha;) * Sin(&theta;) </div>
+                        <div class="col-md-3 border text-center"> a * Cos(&theta;) </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 border text-center"> Sin(&theta;) </div>
+                        <div class="col-md-3 border text-center"> Cos(&alpha;) * Cos(&theta;) </div>
+                        <div class="col-md-3 border text-center"> -Sin(&alpha;) * Cos(&theta;) </div>
+                        <div class="col-md-3 border text-center"> a * Sin(&theta;) </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 border text-center"> 0 </div>
+                        <div class="col-md-3 border text-center"> Sin(&alpha;) </div>
+                        <div class="col-md-3 border text-center"> Cos(&alpha;) </div>
+                        <div class="col-md-3 border text-center"> d </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 border text-center"> 0 </div>
+                        <div class="col-md-3 border text-center"> 0 </div>
+                        <div class="col-md-3 border text-center"> 0 </div>
+                        <div class="col-md-3 border text-center"> 1 </div>
+                    </div>
+                </div><br/>
+
+                Resulting matrix<br/><br/>
+                <div class="col-md-12">
+                    <sup>0</sup>A<sub>4</sub> = <sup>0</sup>A<sub>1</sub> * <sup>1</sup>A<sub>2</sub> * <sup>2</sup>A<sub>3</sub> * <sup>3</sup>A<sub>4</sub>
+                </div><br/>
+                
+                Coordinates<br/><br/>
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-auto matrix">X</div>
+                            <div class="col-md-1 px-0 text-center"></div>
+                            <div class="col-md-auto matrix">0</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-auto matrix">Y</div>
+                            <div class="col-md-1 px-0 text-center">= <sup>0</sup>A<sub>4</sub>&emsp;*</div>
+                            <div class="col-md-auto matrix">0</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-auto matrix">Z</div>
+                            <div class="col-md-1 px-0 text-center"></div>
+                            <div class="col-md-auto matrix">0</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-auto matrix">1</div>
+                            <div class="col-md-1 px-0 text-center"></div>
+                            <div class="col-md-auto matrix">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
