@@ -100,7 +100,7 @@ public class CalculatorManager : ICalculatorManager
                         var resultValue = Convert.ToDouble(result.GetValue(rowA, colB));
                         var product = (Convert.ToDouble(MatrixA.GetValue(rowA, i)) * Convert.ToDouble(MatrixB.GetValue(i, colB)));
 
-                        var value = resultValue + product;//Convert.ToDouble(result.GetValue(rowA, rowB)) + (Convert.ToDouble(MatrixA.GetValue(rowA, i)) * Convert.ToDouble(MatrixB.GetValue(i, rowA)));
+                        var value = resultValue + product;
                         result.SetValue(value, rowA, colB);
 
                     }
