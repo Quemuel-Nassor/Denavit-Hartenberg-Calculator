@@ -1,4 +1,13 @@
-﻿<div class="text-center">
+﻿@section Scripts{
+    <script type="text/javascript">
+        function copyToClipboard(id) {
+            var field = $(id);
+            field.select();
+            document.execCommand('copy');
+        }
+    </script>
+}
+<div class="text-center">
     <h1 class="display-5 my-5">@ViewData["TitlePage"]</h1>
     <div class="text-justify">
         Here you will find documentation on how to integrate our Api into your application
@@ -69,11 +78,16 @@
         <div class="row w-100 mx-auto mt-4">Example:</div>
         <div class="col-md-auto my-2">
             @{var example = @ViewData["CurlExample"];}
-            <input class="form-control" type="text" readonly value="@example" />
+            <div class="input-group">
+                <input id="example" class="form-control" type="text" readonly value="@example" />
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-default border rounded-right" onclick="copyToClipboard('#example')"><i class="fa fa-copy "></i></button>
+                </div>
+            </div>
         </div>
 
         <div class="row w-100 mx-auto mt-4">Response:</div>
-        <div class="col-md-auto my-2" >
+        <div class="col-md-auto my-2">
             <pre class="p-3" style="background-color: #e9ecef; opacity: 1; border-radius: .25rem; max-height: 300px;">@ViewData["ExampleResponse"]</pre>
         </div>
     </div>
