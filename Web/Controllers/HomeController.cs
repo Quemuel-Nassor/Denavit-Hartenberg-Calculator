@@ -94,7 +94,7 @@ namespace Web.Controllers
             }
             var responseDeserialized = JsonSerializer.Deserialize<ApiOutput>(response, options);
 
-            ViewData["CurlExample"] = "$ curl " + UrlApi + " -X POST -v -H \"Content-type: application/json\" -d \n\n'" + jsonInputString + "'";
+            ViewData["CurlExample"] = "curl " + UrlApi + " -X POST -v -H \"Content-type: application/json\" -d \n\n'" + jsonInputString + "'";
             ViewData["ExampleResponse"] = JsonSerializer.Serialize(responseDeserialized, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true, WriteIndented = true });
 
             return View();
