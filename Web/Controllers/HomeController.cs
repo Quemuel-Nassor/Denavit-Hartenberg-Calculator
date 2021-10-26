@@ -45,7 +45,8 @@ namespace Web.Controllers
         [Route("/api")]
         public IActionResult Api()
         {
-            ViewData["Title"] = "Api Documentation";
+            ViewData["Title"] = "Api";
+            ViewData["TitlePage"] = "Api Documentation";
 
             ViewData["ApiEndpoint"] = UrlApi;
 
