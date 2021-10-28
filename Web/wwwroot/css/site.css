@@ -69,3 +69,21 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* matrix style */
+.matrix
+{
+    width: 30px !important;
+    padding: 0 9px !important;
+    border-width: 0px 1px !important;
+    border-color: #dee2e6 !important;
+    border-style: solid !important;
+}
+
+/* code block style */
+.code-block{
+  background-color: #e9ecef !important; 
+  opacity: 1 !important; 
+  border-radius: .25rem !important; 
+  max-height: 300px !important;
+}
