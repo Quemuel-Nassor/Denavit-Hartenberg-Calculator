@@ -26,20 +26,15 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Calculate(ApiInput data)
+        public async Task<ApiOutput> Calculate(ApiInput data)
         {
             try
             {
-                //Json serializer options (disable case sensitive deserialization)
-                JsonSerializerOptions options = new JsonSerializerOptions()
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
                 List<double[,]> listMatrixesAn = new List<double[,]>();
                 List<CalculatorResultDto> Joints = new List<CalculatorResultDto>();
                 int index = 0;
-                data.Options = !String.IsNullOrWhiteSpace(data.Options) ? data.Options : ResultFormatOptions.R.ToString();
+
+                data.Options = !String.IsNullOrWhiteSpace(data.Options) && Enum.GetNames(typeof(ResultFormatOptions)).Contains(data.Options) ? data.Options : ResultFormatOptions.R.ToString();
 
                 //Generate An matrixes
                 foreach (var joint in data.Joints)
@@ -48,7 +43,7 @@ namespace Api.Controllers
                     listMatrixesAn.Add(matrixAn);
                     if (data.Options.Equals(ResultFormatOptions.F.ToString()))
                     {
-                        Joints.Add(new CalculatorResultDto(joint,matrixAn));
+                        Joints.Add(new CalculatorResultDto(joint, matrixAn));
                     }
                     index++;
                 }
@@ -58,9 +53,7 @@ namespace Api.Controllers
 
                 var result = _manager.GetResult(MatrixA0, Joints);
 
-                return new JsonResult(
-                        result,options
-                    );
+                return result;
             }
             catch (Exception error)
             {
