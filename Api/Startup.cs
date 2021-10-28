@@ -30,6 +30,16 @@ namespace Api
         {
             services.AddScoped<ICalculatorManager, CalculatorManager>();
             services.AddControllers();
+
+            services.AddSwaggerDocument(config =>
+            {
+                config.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "API Documentation";
+                    document.Info.Description = "Denavit Hartenberg Calculator API Documentation";
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +50,10 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -48,7 +62,9 @@ namespace Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=SwaggerUI}/{action=Index}");
             });
 
             CultureInfo culture = new CultureInfo("pt-BR");
