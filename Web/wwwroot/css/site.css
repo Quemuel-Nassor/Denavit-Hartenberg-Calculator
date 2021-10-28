@@ -87,3 +87,11 @@ body {
   border-radius: .25rem !important; 
   max-height: 300px !important;
 }
+
+.form-control:focus {
+    box-shadow: 0 0 0 .05rem rgba(0,123,255,.25) !important;
+}
+
+.btn.focus, .btn:focus {
+    box-shadow: 0 0 0 .05rem rgba(0,123,255,.25) !important;
+}
