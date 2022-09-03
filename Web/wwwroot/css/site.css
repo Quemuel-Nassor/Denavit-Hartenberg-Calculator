@@ -2,77 +2,80 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: DarkGray;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 /* matrix style */
-.matrix
-{
+.matrix {
     width: 30px !important;
     padding: 0 9px !important;
     border-width: 0px 1px !important;
@@ -81,11 +84,11 @@ body {
 }
 
 /* code block style */
-.code-block{
-  background-color: #e9ecef !important; 
-  opacity: 1 !important; 
-  border-radius: .25rem !important; 
-  max-height: 300px !important;
+.code-block {
+    background-color: #e9ecef !important;
+    opacity: 1 !important;
+    border-radius: .25rem !important;
+    max-height: 300px !important;
 }
 
 .form-control:focus {
@@ -94,4 +97,146 @@ body {
 
 .btn.focus, .btn:focus {
     box-shadow: 0 0 0 .05rem rgba(0,123,255,.25) !important;
+}
+
+/*Theta character style*/
+.theta {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .theta::before {
+        content: '\3b8'
+    }
+
+.theta-i {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .theta-i::before {
+        content: '\3b8';
+    }
+
+    .theta-i::after {
+        vertical-align: sub !important;
+        content: 'i' !important;
+        font-size: x-small;
+    }
+
+
+/*Alpha character style*/
+.alpha {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .alpha::before {
+        content: '\3b1';
+    }
+
+.alpha-i {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .alpha-i::before {
+        content: '\3b1';
+    }
+
+    .alpha-i::after {
+        vertical-align: sub !important;
+        content: 'i' !important;
+        font-size: x-small;
+    }
+
+/*'a' character style*/
+.a-ch {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .a-ch::before {
+        content: 'a'
+    }
+
+.a-ch-i {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .a-ch-i::before {
+        content: 'a';
+    }
+
+    .a-ch-i::after {
+        vertical-align: sub !important;
+        content: 'i' !important;
+        font-size: x-small;
+    }
+
+
+/*'d' character style*/
+.d-ch {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .d-ch::before {
+        content: 'd'
+    }
+
+.d-ch-i {
+    font-weight: bold !important;
+    color: #f80e0e !important;
+    font-style: normal !important;
+}
+
+    .d-ch-i::before {
+        content: 'd';
+    }
+
+    .d-ch-i::after {
+        vertical-align: sub !important;
+        content: 'i' !important;
+        font-size: x-small;
+    }
+
+a {
+    text-decoration-line: none;
+    color: inherit;
+}
+    a:hover {
+        text-decoration-line: none;
+    }
+
+.form-control {
+    background-color: #e9ecef !important;
+}
+
+.table-info-title {
+    color: var(--light) !important;
+    text-align: center !important;
+    border: 1px solid var(--dark) !important;
+    background-color: var(--secondary) !important;
+}
+
+.table-info-content {
+    border: 1px solid var(--dark) !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.table-info-content-justified {
+    border: 1px solid var(--dark) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center;
 }
