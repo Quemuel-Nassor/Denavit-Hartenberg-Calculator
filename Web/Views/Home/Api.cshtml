@@ -1,85 +1,45 @@
 ﻿<div class="text-center">
     <h1 class="display-5 my-5">@ViewData["TitlePage"]</h1>
     <div class="text-justify">
-        Here you will find documentation on how to integrate our Api into your application
+        Here you will find documentation on how to integrate our api into your application.
 
-        <div class="row w-100 mx-auto mt-4">POST Api endpoint:</div>
-        <div class="col-md-auto my-2">
-            <input class="form-control" type="text" readonly value=@ViewData["ApiEndpoint"] />
+        <div class="row w-100 mx-auto mt-4">Api endpoint:</div>
+        <div class="col-md-12 my-2">
+            <input class="form-control" type="text" disabled value=@ViewData["ApiEndpoint"] />
         </div>
 
-        <div class="row w-100 mx-auto mt-4">Parameters:</div>
-        <div class="col-md-auto my-2 justify-content-around">
-            <div class="row mx-auto bg-secondary text-white">
-                <div class="col-md-2 text-center border border-dark">
-                    <h4 class="align-text-top">Name</h4>
+        <div class="row w-100 mx-auto mt-4 mb-2">Parameters:</div>
+
+
+        <div class="col-md-12">
+            <div class="col mb-2">Angle Theta (<i class="theta"></i>): double value</div>
+            <div class="col mb-2">Distance D (<i class="d-ch"></i>): double value</div>
+            <div class="col mb-2">Distance A (<i class="a-ch"></i>): double value</div>
+            <div class="col mb-2">Angle Alpha (<i class="alpha"></i>): double value</div>
+            <div class="col mb-2">
+                Options (optional):
+                <div class="col">
+                    <strong>S</strong>: simple response, <strong>default</strong> if not specified (returns only coordinates: x, y, z)
                 </div>
-                <div class="col-md-2 text-center border border-dark">
-                    <h4 class="align-text-top">Type</h4>
-                </div>
-                <div class="col-md-8 text-center border border-dark">
-                    <h4 class="align-text-top">Description</h4>
-                </div>
-            </div>
-            <div class="row mx-auto">
-                <div class="col-md-2 text-left pl-3 border border-secondary">Theta (&theta;)</div>
-                <div class="col-md-2 text-center border border-secondary">double</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">
-                    Joint angle obtained between the
-                    X<sub>i-1</sub> and X<sub>i</sub> axes on the Z<sub>i-1</sub> axis (using the right hand rule with
-                    the thumb in Z<sub>i-1</sub>)
-                </div>
-            </div>
-            <div class="row mx-auto">
-                <div class="col-md-2 text-left pl-3 border border-secondary">Distance D</div>
-                <div class="col-md-2 text-center border border-secondary">double</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">
-                    Distance between origin (<sub>i-1</sub>)
-                    iesimal coordinate system to the intersection of the Z<sub>i-1</sub> axis with the X<sub>i</sub>
-                    axis along the Z<sub>i-1</sub> axis
-                </div>
-            </div>
-            <div class="row mx-auto">
-                <div class="col-md-2 text-left pl-3 border border-secondary">Distance A</div>
-                <div class="col-md-2 text-center border border-secondary">double</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">
-                    Distance between the intersection of the
-                    Z<sub>i-1</sub> axis with the X<sub>i</sub> axis to the origin of the iesimal reference system along
-                    X<sub>i</sub> (or shorter distance between the Z<sub>i-1</sub> and Z<sub>i</sub> axes)
-                </div>
-            </div>
-            <div class="row mx-auto">
-                <div class="col-md-2 text-left pl-3 border border-secondary">Alpha (&alpha;)</div>
-                <div class="col-md-2 text-center border border-secondary">double</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">
-                    Is the angle between the Z<sub>i-1</sub>
-                    and Z<sub>i</sub> axes measured on the X<sub>i</sub> axis (right hand rule)
-                </div>
-            </div>
-            <div class="row mx-auto">
-                <div class="col-md-2 text-left pl-3 border border-secondary">Options (optional)</div>
-                <div class="col-md-2 text-center border border-secondary">string</div>
-                <div class="col-md-8 text-left pl-3 border border-secondary">
-                    R: simple response, <strong>default</strong> if not specified (only coordinates: x, y, z)<br />
-                    F: full response (descriptive with full data used to generate result)
+                <div class="col">
+                    <strong>F</strong>: full response (returns all data used to generate result)
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row w-100 mx-auto mt-4">Example:</div>
-        <div class="col-md-auto my-2">
-            @{var example = @ViewData["CurlExample"];}
-            <div class="input-group">
-                <input id="example" class="form-control" type="text" readonly value="@example" />
-                <div class="input-group-prepend">
-                    <button type="button" class="btn btn-default border rounded-right" onclick="copyToClipboard('#example')"><i class="fa fa-copy "></i></button>
-                </div>
+    <div class="row w-100 mx-auto mt-4">Example:</div>
+    <div class="col-md-12 my-2">
+        <div class="input-group">
+            <input id="example" class="form-control" type="text" readonly value="@ViewData["CurlExample"]" />
+            <div class="input-group-prepend">
+                <button type="button" class="btn btn-secondary rounded-right" onclick="copyToClipboard('#example')"><i style="color: lightgray;" class="fa fa-copy"></i></button>
             </div>
         </div>
+    </div>
 
-        <div class="row w-100 mx-auto mt-4">Response:</div>
-        <div class="col-md-auto my-2">
-            <pre class="p-3" style="background-color: #e9ecef; opacity: 1; border-radius: .25rem; max-height: 300px;">@ViewData["ExampleResponse"]</pre>
-        </div>
+    <div class="row w-100 mx-auto mt-4">Response:</div>
+    <div class="col-md-12 my-2">
+        <pre class="p-3" style="text-align:left; color: #495057; background-color: #e9ecef; opacity: 1; border-radius: .25rem; max-height: 300px;">@ViewData["ExampleResponse"]</pre>
     </div>
 </div>

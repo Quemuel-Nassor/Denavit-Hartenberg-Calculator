@@ -16,57 +16,56 @@
               data-ajax-mode="replace"
               data-ajax-update="#calculatorResult">
 
-            <div id="joints" class="mb-3">
-                @for (int i = 0; i < Model.Joints.Count; i++)
-                {
-                    <div id="joint-@i" class="col-md-12 px-0">
-                        <div class="row justify-content-between">
-                            <div class="col-md-auto">
-                                <div class="form-group">
-                                    <label asp-for="@Model.Joints[i].Theta" class="control-label">Angle &theta;</label>
-                                    <input type="text" asp-for="@Model.Joints[i].Theta" value="" required class="ClearFields form-control">
-                                    <span asp-validation-for="@Model.Joints[i].Theta" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-auto">
-                                <div class="form-group">
-                                    <label asp-for="@Model.Joints[i].DistanceD" class="control-label">Distance D</label>
-                                    <input type="text" asp-for="@Model.Joints[i].DistanceD" value="" required class="ClearFields form-control">
-                                    <span asp-validation-for="@Model.Joints[i].DistanceD" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-auto">
-                                <div class="form-group">
-                                    <label asp-for="@Model.Joints[i].DistanceA" class="control-label">Distance A</label>
-                                    <input type="text" asp-for="@Model.Joints[i].DistanceA" value="" required class="ClearFields form-control">
-                                    <span asp-validation-for="@Model.Joints[i].DistanceA" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-auto">
-                                <div class="form-group">
-                                    <label asp-for="@Model.Joints[i].Alpha" class="control-label">Angle &alpha;</label>
-                                    <input type="text" asp-for="@Model.Joints[i].Alpha" value="" required class="ClearFields form-control">
-                                    <span asp-validation-for="@Model.Joints[i].Alpha" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                            @*Submit button*@
-                            <div class="col-md-auto">
-                                <div class="form-group pt-2">
-                                    <label></label>
-                                    <div class="row m-0">
-                                        <button type="button" onclick="removeJoint(@i)" disabled class="RemoveBtn btn btn-danger">
-                                            <span>Remove</span>
-                                        </button>
+                <div id="joints" class="mb-3">
+                    @for (int i = 0; i < Model.Joints.Count; i++)
+                    {
+                        <div id="joint-@i" class="col-md-12 px-0">
+                            <div class="row justify-content-between">
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Joints[i].Theta" class="control-label">Angle <i class="theta"></i></label>
+                                        <input type="text" asp-for="@Model.Joints[i].Theta" value="@Model.Joints[i].Theta" required class="ClearFields form-control">
+                                        <span asp-validation-for="@Model.Joints[i].Theta" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Joints[i].DistanceD" class="control-label">Distance <i class="d-ch"></i></label>
+                                        <input type="text" asp-for="@Model.Joints[i].DistanceD" value="@Model.Joints[i].DistanceD" required class="ClearFields form-control">
+                                        <span asp-validation-for="@Model.Joints[i].DistanceD" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Joints[i].DistanceA" class="control-label">Distance <i class="a-ch"></i></label>
+                                        <input type="text" asp-for="@Model.Joints[i].DistanceA" value="@Model.Joints[i].DistanceA" required class="ClearFields form-control">
+                                        <span asp-validation-for="@Model.Joints[i].DistanceA" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Joints[i].Alpha" class="control-label">Angle <i class="alpha"></i></label>
+                                        <input type="text" asp-for="@Model.Joints[i].Alpha" value="@Model.Joints[i].Alpha" required class="ClearFields form-control">
+                                        <span asp-validation-for="@Model.Joints[i].Alpha" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                @*Submit button*@
+                                <div class="col-md-auto">
+                                    <div class="form-group pt-2">
+                                        <label></label>
+                                        <div class="row m-0">
+                                            <button type="button" onclick="removeJoint(@i)" disabled class="RemoveBtn btn btn-danger">
+                                                <span>Remove</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                }
-            </div>
-
+                    }
+                </div>
 
             <input type="hidden" asp-for="Options" value="@ResultFormatOptions.F.ToString()">
 
@@ -93,7 +92,7 @@
 
             @*Submit result render*@
             <div class="col-md-12 mt-4 px-0">
-                <div class="row w-100 mx-auto" id="calculatorResult"></div>
+                <div id="calculatorResult"></div>
             </div>
         </form>
 
