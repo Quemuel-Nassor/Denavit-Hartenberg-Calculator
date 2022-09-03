@@ -1,71 +1,124 @@
 @model CoreShared.ModelsDto.ApiOutput
 
-@* Result coordinates *@
-<div class="row w-100 mx-auto my-2"><h4>Coordinates </h4></div>
-<div class="col-md-12 border border-dark justify-content-around">
-    <div class="row bg-secondary text-white">
-        <div class="col-md-4 text-center border border-dark">
-            <h4 class="align-text-top">X</h4>
-        </div>
-        <div class="col-md-4 text-center border border-dark">
-            <h4 class="align-text-top">Y</h4>
-        </div>
-        <div class="col-md-4 text-center border border-dark">
-            <h4 class="align-text-top">Z</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 text-center border border-dark">@Model.Xcoordinate</div>
-        <div class="col-md-4 text-center border border-dark">@Model.Ycoordinate</div>
-        <div class="col-md-4 text-center border border-dark">@Model.Zcoordinate</div>
-    </div> 
-</div>
+@*<div class="container border rounded" style="background-color: #e9ecef">*@
+<div class="container">
 
-@* Matrix A0 *@
-<div class="row w-100 mx-auto mb-2 mt-4"><h4>MAtrix A<sub>0</sub> </h4></div>
-<div class="col-md-12 border mb-4 justify-content-around">
-    @foreach(var row in @Model.MatrixA0){
-        <div class="row">
-        @foreach(var col in row){
-            <div class="col-md-3 border text-center">
-                @Math.Round(@col,5)
-            </div>
-        }
-        </div>
-    }
-</div>
-    
-@for(int i = 0; i< Model.Joints.Count; i++)
-{
 
-    <div class="row w-100 mx-auto mt-4 mb-2"><h4>Joint @i</h4></div>
-    <div class="col-md-12">
-        <div class="row border justify-content-around">
-            <div class="col-md-3 border text-center">
-                <strong>Angle &theta;:</strong> @Model.Joints[i].InputData.Theta
-            </div>
-            <div class="col-md-3 border text-center">
-                <strong>Distance D:</strong> @Model.Joints[i].InputData.DistanceD
-            </div>
-            <div class="col-md-3 border text-center">
-                <strong>Distance A:</strong> @Model.Joints[i].InputData.DistanceA
-            </div>
-            <div class="col-md-3 border text-center">
-                <strong>Angle &alpha;:</strong> @Model.Joints[i].InputData.Alpha
+    @* Result coordinates *@
+    <div class="row w-100 mx-auto my-2"><h4>Coordinates </h4></div>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="row border border-dark">
+                <div class="col-md-4 table-info-title">
+                    <h4 class="my-2">X</h4>
+                </div>
+                <div class="col-md-4 table-info-title">
+                    <h4 class="my-2">Y</h4>
+                </div>
+                <div class="col-md-4 table-info-title">
+                    <h4 class="my-2">Z</h4>
+                </div>
+                <div class="col-md-4 table-info-content-justified">@Model.Xcoordinate</div>
+                <div class="col-md-4 table-info-content-justified">@Model.Ycoordinate</div>
+                <div class="col-md-4 table-info-content-justified">@Model.Zcoordinate</div>
             </div>
         </div>
     </div>
 
-    <div class="row w-100 mx-auto mt-4 mb-2"><h4>Matrix <sup>@i</sup>A<sub>@(i+1)</sub></h4></div>
-    <div class="col-md-12 border justify-content-around">
-        @foreach(var row in @Model.Joints[i].MatrixAn){
-            <div class="row">
-                @foreach(var col in row){
-                    <div class="col-md-3 border text-center">
-                        @Math.Round(@col,5)
+    <div class="w-100 mt-4"><h4>Matrix <sup>0</sup><strong>A</strong><sub>4</sub></h4></div>
+    <div class="col-md-12 mb-2">
+        <div class="row mx-0 justify-content-center border border-dark">
+            <div class="col-md-12">
+                @foreach (var row in @Model.MatrixA0)
+                {
+                    <div class="row">
+                        @foreach (var col in row)
+                        {
+                            <div class="col-md-3 border border-dark text-center"> @Math.Round(@col,5) </div>
+                        }
                     </div>
                 }
             </div>
-        }
+        </div>
     </div>
-}
+
+    <div class="w-100 mt-4"><h4>Input parameters</h4></div>
+    <div class="col-md-12 mb-4">
+        <div class="row mx-0 border border-dark">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 table-info-title"> <h4 class="my-2">Joint</h4> </div>
+                    <div class="col-md-2 table-info-title"> <h4 class="my-2">Angle &theta;</h4> </div>
+                    <div class="col-md-2 table-info-title"> <h4 class="my-2">Distance d</h4> </div>
+                    <div class="col-md-2 table-info-title"> <h4 class="my-2">Distance a</h4> </div>
+                    <div class="col-md-2 table-info-title"> <h4 class="my-2">Angle &alpha;</h4> </div>
+                </div>
+                @foreach (var joint in Model.JointsInfo)
+                {
+                    <div class="row">
+                        <div class="col-md-4 table-info-content-justified"> @(Model.JointsInfo.IndexOf(joint) + 1) </div>
+                        <div class="col-md-2 table-info-content-justified"> @joint.InputInfo.Theta </div>
+                        <div class="col-md-2 table-info-content-justified"> @joint.InputInfo.DistanceD </div>
+                        <div class="col-md-2 table-info-content-justified"> @joint.InputInfo.DistanceA </div>
+                        <div class="col-md-2 table-info-content-justified"> @joint.InputInfo.Alpha </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @for (int i = 0; i < Model.JointsInfo.Count; i++)
+    {
+        <div class="container my-3">
+            <div class="row mx-0">
+                <div class="col-md-12 px-0 my-2">
+                    <div class="row mx-0 align-items-end">
+                        <div class="col-md-1 px-0 align-self-center">
+                            <div class="w-100 text-center"><h4>Joint @(i+1)</h4></div>
+                            <div class="row mx-0 row justify-content-center border border-dark">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-12 table-info-content-justified"><i class="theta"></i></div>
+                                        <div class="col-12 table-info-content-justified"><i class="d-ch"></i></div>
+                                        <div class="col-12 table-info-content-justified"><i class="a-ch"></i></div>
+                                        <div class="col-12 table-info-content-justified"><i class="alpha"></i></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-12 table-info-content-justified">@Model.JointsInfo[i].InputInfo.Theta</div>
+                                        <div class="col-12 table-info-content-justified">@Model.JointsInfo[i].InputInfo.DistanceD</div>
+                                        <div class="col-12 table-info-content-justified">@Model.JointsInfo[i].InputInfo.DistanceA</div>
+                                        <div class="col-12 table-info-content-justified">@Model.JointsInfo[i].InputInfo.Alpha</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 px-0 align-self-center">
+                            <div class="row mx-0 justify-content-center">
+                                <div class="col-12 px-0 text-center"><strong style="font-size: xx-large">=</strong></div>
+                            </div>
+                        </div>
+                        <div class="col-md-10 px-0 align-self-center">
+                            <div class="w-100 text-center"><h4>Matrix <sup>@i</sup><strong>A</strong><sub>@(i + 1)</sub></h4></div>
+                            <div class="row mx-0 justify-content-center border border-dark">
+                                <div class="col-md-12">
+                                    @foreach (var row in @Model.JointsInfo[i].MatrixAn)
+                                    {
+                                        <div class="row">
+                                            @foreach (var col in row)
+                                            {
+                                                <div class="col-md-3 border border-dark text-center"> @Math.Round(@col,5) </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
