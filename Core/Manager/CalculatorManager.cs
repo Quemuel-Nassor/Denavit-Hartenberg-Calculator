@@ -178,7 +178,7 @@ public class CalculatorManager : ICalculatorManager
             Xcoordinate = Convert.ToDouble(MatrixA0.GetValue(0, 3)),
             Ycoordinate = Convert.ToDouble(MatrixA0.GetValue(1, 3)),
             Zcoordinate = Convert.ToDouble(MatrixA0.GetValue(2, 3)),
-            Joints = input
+            JointsInfo = input
         };
 
         result.MatrixA0 = new List<List<double>>();
