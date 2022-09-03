@@ -7,7 +7,7 @@ namespace CoreShared.ModelsDto
     /// </summary>
     public class CalculatorResultDto
     {
-        public CalculatorInput InputData { get; set; }
+        public CalculatorInput InputInfo { get; set; }
 
         public List<List<double>> MatrixAn { get; set; }
 
@@ -40,7 +40,7 @@ namespace CoreShared.ModelsDto
                 }
             }
 
-            InputData = inputData;
+            InputInfo = inputData;
         }
     }
 }

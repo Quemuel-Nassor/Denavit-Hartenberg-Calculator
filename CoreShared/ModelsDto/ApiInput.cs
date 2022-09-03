@@ -7,7 +7,7 @@ namespace CoreShared.ModelsDto
 {
     public class ApiInput
     {
-        public string Options { get; set; } = ResultFormatOptions.R.ToString();
+        public string Options { get; set; } = ResultFormatOptions.S.ToString();
         public List<CalculatorInput> Joints { get; set; }
     }
 }
