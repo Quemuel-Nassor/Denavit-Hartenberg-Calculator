@@ -11,6 +11,7 @@ using CoreShared.Constants;
 using System.Net.Http;
 using System.Text;
 using System.Net.Mime;
+using System.Text.RegularExpressions;
 
 namespace Api.Controllers
 {
@@ -34,7 +35,8 @@ namespace Api.Controllers
                 List<CalculatorResultDto> Joints = new List<CalculatorResultDto>();
                 int index = 0;
 
-                data.Options = !String.IsNullOrWhiteSpace(data.Options) && Enum.GetNames(typeof(ResultFormatOptions)).Contains(data.Options) ? data.Options : ResultFormatOptions.R.ToString();
+                data.Options = Regex.Replace(data.Options, @"[^(s|S|f|F)]*","").ToUpper();
+                data.Options = String.IsNullOrWhiteSpace(data.Options) ? ResultFormatOptions.S.ToString() : Enum.GetNames(typeof(ResultFormatOptions)).Contains(data.Options) ? data.Options : ResultFormatOptions.S.ToString();
 
                 //Generate An matrixes
                 foreach (var joint in data.Joints)
