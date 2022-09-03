@@ -31,28 +31,28 @@ function addJoint() {
         '<div class="row justify-content-between">' +
         '<div class="col-md-auto">' +
         '<div class="form-group">' +
-        '<label class="control-label" for="Joints_' + id + '__Theta">Angle θ</label>' +
+        '<label class="control-label" for="Joints_' + id + '__Theta">Angle <i class="theta"></i></label>' +
         '<input type="text" required class="ClearFields form-control input-validation-error" data-val="true" data-val-number="The field Theta must be a number." data-val-required="Theta is required" id="Joints_' + id + '__Theta" name="Joints[' + id + '].Theta" value="" aria-describedby="Joints_' + id + '__Theta-error" aria-invalid="true">' +
         '<span class="text-danger field-validation-error" data-valmsg-for="Joints[' + id + '].Theta" data-valmsg-replace="true">' +
         '</div>' +
         '</div>' +
         '<div class="col-md-auto">' +
         '<div class="form-group">' +
-        '<label class="control-label" for="Joints_' + id + '__DistanceD">Distance D</label>' +
+        '<label class="control-label" for="Joints_' + id + '__DistanceD">Distance <i class="d-ch"></i></label>' +
         '<input type="text" required class="ClearFields form-control input-validation-error" data-val="true" data-val-number="The field DistanceD must be a number." data-val-required="DistanceD is required" id="Joints_' + id + '__DistanceD" name="Joints[' + id + '].DistanceD" value="" aria-describedby="Joints_' + id + '__DistanceD-error" aria-invalid="true">' +
         '<span class="text-danger field-validation-error" data-valmsg-for="Joints[' + id + '].DistanceD" data-valmsg-replace="true">' +
         '</div>' +
         '</div>' +
         '<div class="col-md-auto">' +
         '<div class="form-group">' +
-        '<label class="control-label" for="Joints_' + id + '__DistanceA">Distance A</label>' +
+        '<label class="control-label" for="Joints_' + id + '__DistanceA">Distance <i class="a-ch"></i></label>' +
         '<input type="text" required class="ClearFields form-control input-validation-error" data-val="true" data-val-number="The field DistanceA must be a number." data-val-required="DistanceA is required" id="Joints_' + id + '__DistanceA" name="Joints[' + id + '].DistanceA" value="" aria-describedby="Joints_' + id + '__DistanceA-error" aria-invalid="true">' +
         '<span class="text-danger field-validation-error" data-valmsg-for="Joints[' + id + '].DistanceA" data-valmsg-replace="true">' +
         '</div>' +
         '</div>' +
         '<div class="col-md-auto">' +
         '<div class="form-group">' +
-        '<label class="control-label" for="Joints_' + id + '__Alpha">Angle α</label>' +
+        '<label class="control-label" for="Joints_' + id + '__Alpha">Angle <i class="alpha"></i></label>' +
         '<input type="text" required class="ClearFields form-control input-validation-error" data-val="true" data-val-number="The field Alpha must be a number." data-val-required="Alpha is required" id="Joints_' + id + '__Alpha" name="Joints[' + id + '].Alpha" value="" aria-describedby="Joints_' + id + '__Alpha-error" aria-invalid="true">' +
         '<span class="text-danger field-validation-error" data-valmsg-for="Joints[' + id + '].Alpha" data-valmsg-replace="true">' +
         '</div>' +
