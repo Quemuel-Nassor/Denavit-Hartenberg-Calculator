@@ -8,7 +8,7 @@ namespace CoreShared.Constants
         /// <summary>
         /// Simple response
         /// </summary>
-        R,
+        S,
         /// <summary>
         /// Complete response
         /// </summary>
