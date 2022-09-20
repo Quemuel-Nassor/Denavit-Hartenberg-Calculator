@@ -15,7 +15,7 @@ namespace Web.Controllers
     public class CalculatorController : Controller
     {
         [HttpPost]
-        public async Task<IActionResult> Calculate(ApiInput input)
+        public IActionResult Calculate(ApiInput input)
         {
             return ViewComponent("GetCalculatorResult", input);
         }
