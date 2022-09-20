@@ -21,6 +21,11 @@ namespace Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
+                    var envPort = Environment.GetEnvironmentVariable("PORT");
+
+                    if(envPort != null)
+                        webBuilder.UseUrls("http://*:" + envPort);
                 });
     }
 }
