@@ -17,7 +17,7 @@
 </p>
 <p align="center">
 
-<a rel="noopener noreferrer nofollow" href="https://dh-calculator.herokuapp.com/">
+<a rel="noopener noreferrer nofollow" href="https://dh-calculator.herokuapp.com">
 <img alt="Website" src="https://img.shields.io/website?down_color=red&down_message=Offline&label=Calculator&style=plastic&up_color=blue&up_message=Online&url=https%3A%2F%2Fdh-calculator.herokuapp.com%2F">
 </a>
 <a rel="noopener noreferrer nofollow" href="http://dh-api.qnengineering.com.br/swagger/index.html#/Calculator">
