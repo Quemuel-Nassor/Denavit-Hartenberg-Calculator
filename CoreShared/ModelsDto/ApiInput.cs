@@ -8,6 +8,6 @@ namespace CoreShared.ModelsDto
     public class ApiInput
     {
         public string Options { get; set; } = ResultFormatOptions.S.ToString();
-        public List<CalculatorInput> Joints { get; set; }
+        public List<Joint> Joints { get; set; }
     }
 }
