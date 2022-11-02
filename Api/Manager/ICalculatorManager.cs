@@ -2,10 +2,9 @@
 using CoreShared.ModelsDto;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 
-namespace Core.Manager{
+namespace Api.Manager
+{
     public interface ICalculatorManager
     {
 
@@ -15,7 +14,7 @@ namespace Core.Manager{
         /// <param name="input">Parameters to generate matrix</param>
         /// <returns> AnMatrix </returns>
         /// <exception cref="Exception"> Generic exception </exception>
-        public double[,] GenerateMatrixAn(CalculatorInput input);
+        public double[,] GenerateMatrixAn(Joint input);
 
         /// <summary>
         /// Method to realize product of matrixes
@@ -41,6 +40,6 @@ namespace Core.Manager{
         /// <param name="MatrixA0"> Matrix A0 </param>
         /// <param name="input"> calcu </param>
         /// <returns></returns>
-        public ApiOutput GetResult(double[,] MatrixA0, List<CalculatorResultDto> input);
+        public ApiOutput GetResult(double[,] MatrixA0, List<Result> input);
     }
 }
