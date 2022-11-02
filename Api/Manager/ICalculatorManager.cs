@@ -1,5 +1,5 @@
 
-using CoreShared.ModelsDto;
+using Models.ModelsDto;
 using System;
 using System.Collections.Generic;
 
