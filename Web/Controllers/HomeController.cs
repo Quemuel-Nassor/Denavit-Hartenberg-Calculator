@@ -1,5 +1,5 @@
-﻿using CoreShared.Constants;
-using CoreShared.ModelsDto;
+﻿using Models.Constants;
+using Models.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -53,11 +53,11 @@ namespace Web.Controllers
             var exampleInputData = new ApiInput()
             {
                 Options = ResultFormatOptions.F.ToString(),
-                Joints = new List<CalculatorInput>(){
-                    new CalculatorInput(theta: 90,distanceD: 4,distanceA: 2,alpha: 0),
-                    new CalculatorInput(theta: 180,distanceD: 0,distanceA: 1,alpha: 180),
-                    new CalculatorInput(theta: 0,distanceD: 2,distanceA: 0,alpha: 0),
-                    new CalculatorInput(theta: 90,distanceD: 0,distanceA: 0,alpha: 0)
+                Joints = new List<Joint>(){
+                    new Joint(theta: 90,distanceD: 4,distanceA: 2,alpha: 0),
+                    new Joint(theta: 180,distanceD: 0,distanceA: 1,alpha: 180),
+                    new Joint(theta: 0,distanceD: 2,distanceA: 0,alpha: 0),
+                    new Joint(theta: 90,distanceD: 0,distanceA: 0,alpha: 0)
                 }
             };
 
@@ -68,7 +68,7 @@ namespace Web.Controllers
             };
 
             //Serialize input model
-            var jsonInputString = JsonSerializer.Serialize(exampleInputData, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true});
+            var jsonInputString = JsonSerializer.Serialize(exampleInputData, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             var content = new StringContent(jsonInputString, Encoding.UTF8, MediaTypeNames.Application.Json);
 
             string response;
@@ -105,7 +105,7 @@ namespace Web.Controllers
         {
             ViewData["Title"] = "Calculator";
 
-            var model = new ApiInput() { Joints = new List<CalculatorInput>() { new CalculatorInput() } };
+            var model = new ApiInput() { Joints = new List<Joint>() { new Joint() } };
 
             return View(model);
         }
