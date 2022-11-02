@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using CoreShared.Constants;
 
-namespace CoreShared.ModelsDto
+namespace Models.ModelsDto
 {
     public class Joint
     {

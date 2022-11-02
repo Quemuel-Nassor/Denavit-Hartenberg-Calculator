@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CoreShared.ModelsDto
+namespace Models.ModelsDto
 {
     /// <summary>
     /// Class to return result calculated

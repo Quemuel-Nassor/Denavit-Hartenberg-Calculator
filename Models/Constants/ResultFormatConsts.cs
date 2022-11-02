@@ -1,4 +1,4 @@
-namespace CoreShared.Constants
+namespace Models.Constants
 {
     /// <summary>
     /// Api response types

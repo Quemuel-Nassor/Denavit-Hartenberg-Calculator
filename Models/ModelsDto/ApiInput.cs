@@ -1,9 +1,9 @@
-﻿using CoreShared.Constants;
+﻿using Models.Constants;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoreShared.ModelsDto
+namespace Models.ModelsDto
 {
     public class ApiInput
     {
