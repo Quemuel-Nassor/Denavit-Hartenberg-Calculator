@@ -1,18 +1,10 @@
-using Core.Manager;
+using Api.Manager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Api
 {
@@ -28,16 +20,15 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICalculatorManager, CalculatorManager>();
+            services.AddSingleton<ICalculatorManager, CalculatorManager>();
             services.AddControllers();
 
             services.AddSwaggerDocument(config =>
             {
                 config.PostProcess = document =>
                 {
-                    document.Info.Version = "v1";
                     document.Info.Title = "API Documentation";
-                    document.Info.Description = "Denavit Hartenberg Calculator API Documentation";
+                    document.Info.Description = "Denavit Hartenberg Calculator";
                 };
             });
         }
