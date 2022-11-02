@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using CoreShared.ModelsDto;
+using Models.ModelsDto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CoreShared.Constants;
+using Models.Constants;
 using System.Text.RegularExpressions;
 using Api.Manager;
 

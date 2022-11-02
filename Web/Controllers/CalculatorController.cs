@@ -1,14 +1,7 @@
-using CoreShared.ModelsDto;
+using Models.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Web.Models;
-using Microsoft.Extensions.Configuration;
-using CoreShared.Constants;
 
 namespace Web.Controllers
 {

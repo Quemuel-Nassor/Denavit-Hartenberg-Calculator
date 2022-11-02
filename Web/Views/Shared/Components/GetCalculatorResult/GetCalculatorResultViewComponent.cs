@@ -1,4 +1,4 @@
-using CoreShared.ModelsDto;
+using Models.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
