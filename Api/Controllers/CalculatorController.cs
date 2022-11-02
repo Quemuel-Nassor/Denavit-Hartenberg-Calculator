@@ -1,17 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using CoreShared.ModelsDto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Manager;
 using CoreShared.Constants;
-using System.Net.Http;
-using System.Text;
-using System.Net.Mime;
 using System.Text.RegularExpressions;
+using Api.Manager;
 
 namespace Api.Controllers
 {
@@ -32,7 +27,7 @@ namespace Api.Controllers
             try
             {
                 List<double[,]> listMatrixesAn = new List<double[,]>();
-                List<CalculatorResultDto> Joints = new List<CalculatorResultDto>();
+                List<Result> Joints = new List<Result>();
                 int index = 0;
 
                 data.Options = Regex.Replace(data.Options, @"[^(s|S|f|F)]*","").ToUpper();
@@ -45,7 +40,7 @@ namespace Api.Controllers
                     listMatrixesAn.Add(matrixAn);
                     if (data.Options.Equals(ResultFormatOptions.F.ToString()))
                     {
-                        Joints.Add(new CalculatorResultDto(joint, matrixAn));
+                        Joints.Add(new Result(joint, matrixAn));
                     }
                     index++;
                 }
@@ -55,7 +50,7 @@ namespace Api.Controllers
 
                 var result = _manager.GetResult(MatrixA0, Joints);
 
-                return result;
+                return await Task.FromResult(result);
             }
             catch (Exception error)
             {
